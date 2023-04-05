@@ -7,7 +7,7 @@ const Box = ({ content, setShowLearningUnit }) => {
 
   return (
     <div
-      className="bg-[#C6D8EA] text-[3rem] rounded-lg p-[3.5rem] mx-[1.5rem]  cursor-pointer"
+      className="bg-[#C6D8EA] text-[3rem] rounded-lg p-[3.5rem] m-[1.5rem]  cursor-pointer"
       onClick={showUnit}
     >
       {content}
