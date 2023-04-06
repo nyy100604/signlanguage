@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ImHome, ImFilm } from "react-icons/im";
 import { MdAccessibilityNew } from "react-icons/md";
 
-const NavComponents = ({ needIcon = true }) => {
+const NavComponents = ({ needIcon }) => {
+  console.log("needIcon", needIcon);
   const go = useNavigate();
   return (
     <header className="bg-[#20639E] sticky top-0  font-bold text-2xl px-[1rem] py-[1rem] hover:drop-shadow-xl text-white ">
@@ -19,29 +20,32 @@ const NavComponents = ({ needIcon = true }) => {
             AI辨識手語學習網站
           </span>
         </div>{" "}
-        {needIcon && (
-          <div className="flex w-[10rem] text-[2rem] justify-around mt-2 md:my-0 cursor-pointer ">
-            {" "}
-            <ImHome
-              className=" hover:drop-shadow-md"
-              onClick={() => {
-                go("/");
-              }}
-            />
-            <ImFilm
-              className=" hover:drop-shadow-md"
-              onClick={() => {
-                go("/learning");
-              }}
-            />
-            <MdAccessibilityNew
-              className=" hover:drop-shadow-md"
-              onClick={() => {
-                go("/practice");
-              }}
-            />
-          </div>
-        )}
+        <div className="flex w-[10px] text-[2rem] justify-around mt-2 md:my-0 cursor-pointer ">
+          {" "}
+          {needIcon && (
+            <>
+              {" "}
+              <ImHome
+                className=" hover:drop-shadow-md"
+                onClick={() => {
+                  go("/");
+                }}
+              />
+              <ImFilm
+                className=" hover:drop-shadow-md"
+                onClick={() => {
+                  go("/learning");
+                }}
+              />
+              <MdAccessibilityNew
+                className=" hover:drop-shadow-md"
+                onClick={() => {
+                  go("/practice");
+                }}
+              />
+            </>
+          )}
+        </div>
       </div>
     </header>
   );

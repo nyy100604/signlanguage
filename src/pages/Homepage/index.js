@@ -8,6 +8,7 @@ import UnitSelect from "./components/UnitSelect";
 const Main = () => {
   const wbesiteContent = ["學習區", "練習區", "測驗區"];
   const [showLearningUnit, setShowLearningUnit] = useState(false);
+
   return (
     <>
       <div>
@@ -16,7 +17,7 @@ const Main = () => {
           <div className="text-[2rem] bg-slate-500 p-[2rem] ">
             sign website Icon
           </div>
-          <div className="flex text-[2rem]">
+          <div className="flex text-[2rem] flex-wrap justify-center">
             {wbesiteContent.map((theme) => (
               <Box
                 key={uuidv4()}
