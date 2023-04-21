@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import NavComponents from "../../components/NavComponents";
+import axios from 'axios'
 
 // 第一次啟動攝影機
 
 const Practice = () => {
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
-
+  const [accuracyNum, setWord] = useState("")
   /**
    * MediaRecorder Related Event Handler
    */
@@ -134,29 +135,40 @@ const Practice = () => {
           console.log("mediaRecorder on dataavailable", e.data);
           chunks.push(e.data);
         }
-        function mediaRecorderOnStop(e) {
+        async function mediaRecorderOnStop(e) {
           console.log("mediaRecorder on stop");
           // outputVideo.controls = true;
-          var blob = new Blob(chunks, { type: "video/mp4" });
+          var file = new File(chunks, 'video.mp4',{ type: "video/mp4" });
           chunks = [];
           // outputVideoURL = URL.createObjectURL(blob);
           // console.log(outputVideoURL);
           // outputVideo.src = outputVideoURL;
           var formData = new FormData();
-          formData.append("content", blob);
-          const apiUrl = "http://192.168.1.34:5000/upload";
+          formData.append("file", file);
+          // const apiUrl = "http://localhost:5000/upload";
+          const response = await axios.post(
+            'http://localhost:5000/upload',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+          console.log(response.data)
+          setWord(response.data)
 
-          fetch(apiUrl, {
-            method: "POST",
-            body: formData,
-            // mode: "no-cors",
-          })
-            .then((response) => {
-              console.log("hi" + response);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          // fetch(apiUrl, {
+          //   method: "POST",
+          //   body: formData,
+          //   // mode: "no-cors",
+          // })
+          //   .then((response) => {
+          //     console.log("hi" + response);
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //   });
 
           // 停止所有的輸入或輸出的串流裝置（例如，關攝影機）
           stream.getTracks().forEach(function (track) {
@@ -198,7 +210,7 @@ const Practice = () => {
       </button>
       <p>{time}</p>
       <p>{time2}</p>
-      {time2 == 0 && <p>分數為：</p>}
+      {time2 == 0 && <p>分數為：{accuracyNum}</p>}
     </>
   );
 };
