@@ -8,6 +8,7 @@ import UnitSelect from "./components/UnitSelect";
 const Main = () => {
   const wbesiteContent = ["學習區", "練習區", "測驗區"];
   const [showLearningUnit, setShowLearningUnit] = useState(false);
+  const [showPractice, setShowPractice] = useState(false);
 
   return (
     <>
@@ -23,6 +24,7 @@ const Main = () => {
                 key={uuidv4()}
                 content={theme}
                 setShowLearningUnit={setShowLearningUnit}
+                setShowPractice={setShowPractice}
               />
             ))}
           </div>{" "}
