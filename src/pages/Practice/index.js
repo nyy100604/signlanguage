@@ -48,7 +48,7 @@ const Practice = () => {
     video: {
       width: { min: 1280 },
       height: { min: 720 },
-      frameRate: { ideal: 20, max: 20 },
+      frameRate: 20,
     },
   };
 
@@ -181,11 +181,17 @@ const Practice = () => {
     <>
       {" "}
       <NavComponents />
-      <div>
+      <div className=" flex justify-center items-center relative mt-[5rem]">
         {" "}
-        <video id="inputVideo" alt="在這裡錄影" muted>
+        <video
+          id="inputVideo"
+          alt="在這裡錄影"
+          className=" w-[800px] h-[410px]"
+          muted
+        >
           Video stream not available.
         </video>
+        <p className=" absolute top-[50%] text-white text-[2rem]">{time}</p>
       </div>
       <button className="startBtn bg-red-600" onClick={start}>
         開始錄製
