@@ -6,10 +6,31 @@ import axios from "axios";
 // 第一次啟動攝影機
 
 const Practice = () => {
+  let words = [
+    "公園",
+    "幫忙",
+    "算",
+    "下一個",
+    "開始",
+    "連續",
+    "完",
+    "11",
+    "12",
+    "20",
+    "21",
+    "30",
+    "40",
+    "50",
+    "60",
+    "100",
+    "做",
+    "那/那裡",
+  ];
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
+  let [wait, setWait] = useState(false);
   let [question, setQuestion] = useState(1);
-  const [loading, setLoading] = useState(false);
+  let [recording, setRecording] = useState(false);
   const [accuracyNum, setAccuracyNum] = useState(null);
   /**
    * MediaRecorder Related Event Handler
@@ -20,12 +41,16 @@ const Practice = () => {
 
   function start() {
     // mediaRecorderSetup();
-    console.log(mediaRecorder);
+    // console.log(mediaRecorder);
+
     let intetval1 = setInterval(() => {
+      setWait(true);
       time--;
       setTime(time);
       if (time <= 0) {
         clearInterval(intetval1);
+        setTime("start recording");
+        setWait(false);
         start2();
       }
     }, 1000);
@@ -33,16 +58,21 @@ const Practice = () => {
 
   function start2() {
     console.log(time2);
+
+    console.log(recording);
     setTime();
+    setRecording(true);
     onStartRecording();
     let intetval2 = setInterval(() => {
       time2--;
       setTime2(time2);
+      setRecording(!recording);
       // console.log(time2);
       if (time2 <= 0) {
         clearInterval(intetval2);
         onStopRecording();
-        setTime("end of recording");
+        setTime("End of recording");
+        setRecording(false);
       }
     }, 1000);
   }
@@ -53,7 +83,7 @@ const Practice = () => {
     video: {
       width: { min: 1280 },
       height: { min: 720 },
-      frameRate: 20,
+      frameRate: { ideal: 20, max: 20 },
     },
   };
 
@@ -80,14 +110,7 @@ const Practice = () => {
   function onReset() {
     // 釋放記憶體
     URL.revokeObjectURL(inputVideoURL);
-    // URL.revokeObjectURL(outputVideoURL);
-    // outputVideo.src = "";
-    // outputVideo.controls = false;
-
-    // inputVideo.src = "";
-
     // 重新啟動攝影機
-
     setTime(3);
     setTime2(5);
     setQuestion((q) => {
@@ -187,10 +210,12 @@ const Practice = () => {
     <>
       {" "}
       <NavComponents needIcon={true} />
-      <div className="min-h-[80vh]">
-        <div className=" flex flex-col justify-center items-center relative mt-[2rem]">
+      <div className="min-h-[85vh] flex  flex-wrap">
+        <div className="left flex flex-col justify-center items-center relative w-[1000px] mt-[2rem]">
           {" "}
-          <p className=" text-[1.5rem]">{question}、公園</p>
+          <p className=" text-[1.5rem]">{`${question}、${
+            words[question - 1]
+          }`}</p>
           <video
             id="inputVideo"
             alt="在這裡錄影"
@@ -199,47 +224,60 @@ const Practice = () => {
           >
             Video stream not available.
           </video>
-          <p className=" absolute top-[50%] text-white text-[2rem]">{time}</p>
+          <p className=" absolute top-[50%] text-white text-[3.5rem]">{time}</p>
         </div>
-        {time == 3 && (
-          <button
-            className="rounded-lg text-white text-[1.2rem] bg-red-600 py-[0.7rem] px-[1rem]"
-            onClick={start}
-          >
-            開始錄製
-          </button>
-        )}
-        {time2 == 0 && (
-          <button
-            className="rounded-lg text-white text-[1.2rem] bg-sky-600 py-[0.7rem] px-[1rem]"
-            onClick={onReset}
-          >
-            下一題
-          </button>
-        )}
-        {!accuracyNum && (
-          <div role="status">
-            <svg
-              aria-hidden="true"
-              class="inline w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-              viewBox="0 0 100 101"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+
+        <div className="right flex items-center w-[100%] justify-center flex-col  w-[240px] mt-[2rem]">
+          {" "}
+          {time == 3 && (
+            <button
+              className="rounded-lg text-white text-[1.5rem] bg-red-600 py-[0.7rem] px-[1rem]"
+              onClick={start}
             >
-              <path
-                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                fill="currentColor"
-              />
-              <path
-                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                fill="currentFill"
-              />
-            </svg>
-            <span className=" text-slate-400">等待手語成績回傳...</span>
-          </div>
-        )}
-        <p>{time2}</p>
-        {accuracyNum && <p>分數為：{accuracyNum}</p>}
+              開始錄製
+            </button>
+          )}
+          {time2 == 0 && (
+            <button
+              className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.7rem] px-[1rem]"
+              onClick={onReset}
+            >
+              下一題
+            </button>
+          )}
+          {time2 == 0 && !accuracyNum && (
+            <div role="status" className="flex items-center justify-center">
+              <svg
+                aria-hidden="true"
+                class="inline w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                />
+              </svg>
+              <span className=" text-slate-400 mt-5">等待手語成績回傳...</span>
+            </div>
+          )}
+          {recording && (
+            <img
+              className="w-[200px] "
+              src={`${require("./picture/recording.png")}`}
+            />
+          )}
+          {wait && <p className="text-[2rem] mt-5">準備3秒</p>}
+          {recording && (
+            <p className="text-[2rem] mt-5">{`剩餘秒數： ${time2}`}</p>
+          )}
+          {accuracyNum && <p>分數為：{accuracyNum}</p>}
+        </div>
       </div>
       <Footer />
     </>
