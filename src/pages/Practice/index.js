@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import NavComponents from "../../components/NavComponents";
-import axios from 'axios'
+import Footer from "../../components/Footer";
+import axios from "axios";
 
 // 第一次啟動攝影機
 
 const Practice = () => {
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
-  const [accuracyNum, setWord] = useState("")
+  let [question, setQuestion] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [accuracyNum, setAccuracyNum] = useState(null);
   /**
    * MediaRecorder Related Event Handler
    */
@@ -16,29 +19,30 @@ const Practice = () => {
   // let outputVideoURL = null;
 
   function start() {
-    mediaRecorderSetup();
+    // mediaRecorderSetup();
+    console.log(mediaRecorder);
     let intetval1 = setInterval(() => {
       time--;
       setTime(time);
-      console.log(time);
       if (time <= 0) {
-        setTime(time);
         clearInterval(intetval1);
-        setTime("start recoding");
         start2();
       }
     }, 1000);
   }
 
   function start2() {
+    console.log(time2);
+    setTime();
     onStartRecording();
     let intetval2 = setInterval(() => {
       time2--;
       setTime2(time2);
-      console.log(time2);
+      // console.log(time2);
       if (time2 <= 0) {
         clearInterval(intetval2);
         onStopRecording();
+        setTime("end of recording");
       }
     }, 1000);
   }
@@ -86,14 +90,14 @@ const Practice = () => {
 
     setTime(3);
     setTime2(5);
-    mediaRecorderSetup();
+    setQuestion((q) => {
+      return q + 1;
+    });
   }
 
   function mediaRecorderSetup() {
     inputVideo = document.querySelector("#inputVideo");
     let chunks = []; // 在 mediaRecord 要用的 chunks
-    // 設定顯示的按鍵
-    // isRecordingBtn("start");
     /**
      * DOM EventListener
      */
@@ -137,8 +141,14 @@ const Practice = () => {
         }
         async function mediaRecorderOnStop(e) {
           console.log("mediaRecorder on stop");
+          // 停止所有的輸入或輸出的串流裝置（例如，關攝影機）
+          stream.getTracks().forEach(function (track) {
+            console.log("Close Camera");
+            track.stop();
+          });
+
           // outputVideo.controls = true;
-          var file = new File(chunks, 'video.mp4',{ type: "video/mp4" });
+          var file = new File(chunks, "video.mp4", { type: "video/mp4" });
           chunks = [];
           // outputVideoURL = URL.createObjectURL(blob);
           // console.log(outputVideoURL);
@@ -146,34 +156,18 @@ const Practice = () => {
           var formData = new FormData();
           formData.append("file", file);
           // const apiUrl = "http://localhost:5000/upload";
+
           const response = await axios.post(
-            'http://localhost:5000/upload',
+            "http://localhost:5000/upload",
             formData,
             {
               headers: {
-                'Content-Type': 'multipart/form-data',
+                "Content-Type": "multipart/form-data",
               },
-            },
-          )
-          console.log(response.data)
-          setWord(response.data)
-
-          // fetch(apiUrl, {
-          //   method: "POST",
-          //   body: formData,
-          //   // mode: "no-cors",
-          // })
-          //   .then((response) => {
-          //     console.log("hi" + response);
-          //   })
-          //   .catch((error) => {
-          //     console.log(error);
-          //   });
-
-          // 停止所有的輸入或輸出的串流裝置（例如，關攝影機）
-          stream.getTracks().forEach(function (track) {
-            track.stop();
-          });
+            }
+          );
+          console.log(response.data);
+          setAccuracyNum(response.data);
         }
       })
       .catch(function (error) {
@@ -187,36 +181,67 @@ const Practice = () => {
 
   useEffect(() => {
     mediaRecorderSetup();
-  }, []);
+  }, [question]);
 
   return (
     <>
       {" "}
-      <NavComponents />
-      <div className=" flex justify-center items-center relative mt-[5rem]">
-        {" "}
-        <video
-          id="inputVideo"
-          alt="在這裡錄影"
-          className=" w-[800px] h-[410px]"
-          muted
-        >
-          Video stream not available.
-        </video>
-        <p className=" absolute top-[50%] text-white text-[2rem]">{time}</p>
+      <NavComponents needIcon={true} />
+      <div className="min-h-[80vh]">
+        <div className=" flex flex-col justify-center items-center relative mt-[2rem]">
+          {" "}
+          <p className=" text-[1.5rem]">{question}、公園</p>
+          <video
+            id="inputVideo"
+            alt="在這裡錄影"
+            className=" w-[800px] h-[410px] "
+            muted
+          >
+            Video stream not available.
+          </video>
+          <p className=" absolute top-[50%] text-white text-[2rem]">{time}</p>
+        </div>
+        {time == 3 && (
+          <button
+            className="rounded-lg text-white text-[1.2rem] bg-red-600 py-[0.7rem] px-[1rem]"
+            onClick={start}
+          >
+            開始錄製
+          </button>
+        )}
+        {time2 == 0 && (
+          <button
+            className="rounded-lg text-white text-[1.2rem] bg-sky-600 py-[0.7rem] px-[1rem]"
+            onClick={onReset}
+          >
+            下一題
+          </button>
+        )}
+        {!accuracyNum && (
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              class="inline w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+            <span className=" text-slate-400">等待手語成績回傳...</span>
+          </div>
+        )}
+        <p>{time2}</p>
+        {accuracyNum && <p>分數為：{accuracyNum}</p>}
       </div>
-      <button className="startBtn bg-red-600" onClick={start}>
-        開始錄製
-      </button>
-      <button className="stopBtn bg-blue-400" onClick={onStopRecording}>
-        結束錄製
-      </button>
-      <button className="resetBtn bg-slate-400" onClick={onReset}>
-        下一題
-      </button>
-      <p>{time}</p>
-      <p>{time2}</p>
-      {time2 == 0 && <p>分數為：{accuracyNum}</p>}
+      <Footer />
     </>
   );
 };

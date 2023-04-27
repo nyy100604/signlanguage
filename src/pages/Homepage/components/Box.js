@@ -7,6 +7,9 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
     if (content === "練習區") {
       go("/practice");
     }
+    if (content === "測驗區") {
+      go("/Examination");
+    }
   };
 
   return (

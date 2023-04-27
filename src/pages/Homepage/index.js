@@ -14,7 +14,7 @@ const Main = () => {
     <>
       <div>
         <NavComponents needIcon={false} />
-        <main className="min-h-[70vh] flex flex-col items-center justify-around text-[5rem]">
+        <main className="min-h-[85vh] flex flex-col items-center justify-around text-[5rem]">
           <div className="text-[2rem] bg-slate-500 p-[2rem] ">
             sign website Icon
           </div>

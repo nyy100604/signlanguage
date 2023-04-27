@@ -16,7 +16,7 @@ const Learning = () => {
   return (
     <>
       {" "}
-      <NavComponents />
+      <NavComponents needIcon={true} />
       <div className="flex flex-wrap h-[80vh] px-[auto] justify-center min-h-[80vh] my-4">
         <div className="left w-[350px]  flex flex-col justify-center items-center">
           <div className="flex justify-center items-center bg-[#20639E] w-[250px] h-[3rem] rounded-t-lg text-white text-[1.5rem]">
