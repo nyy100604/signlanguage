@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ImHome, ImFilm } from "react-icons/im";
 import { MdAccessibilityNew } from "react-icons/md";
-
+import { SiHandshake } from "react-icons/si";
 const NavComponents = ({ needIcon }) => {
   // console.log("needIcon", needIcon);
   const go = useNavigate();
@@ -11,13 +11,13 @@ const NavComponents = ({ needIcon }) => {
       <div className="flex flex-col items-center justify-center max-w-full h-[4.5rem] md:flex md:flex-row md:justify-between md:max-w-[1022px] md:mx-[auto]">
         {" "}
         <div className="cursor-pointer">
-          <span
+          <span className="flex"
             onClick={() => {
               go("/");
             }}
           >
             {" "}
-            AI辨識手語學習網站
+            <SiHandshake/> AI手語助學網站
           </span>
         </div>{" "}
         <div className="flex w-[300px] justify-evenly mt-2 md:my-0 cursor-pointer ">
