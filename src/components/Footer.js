@@ -9,16 +9,17 @@ const Footer = () => {
     window.addEventListener("scroll", (handleScroll) => {
       let a = window.pageYOffset;
       setPageYnum(a);
-      console.log(pageYnum);
+      // console.log(pageYnum);
     });
   }, [pageYnum]);
 
   return (
     <footer
       className={`${
-        pageYnum !== 0
-          ? " hidden"
-          : "fixed bottom-[0rem] w-[100%] h-[3rem] flex text-white justify-center items-center"
+        // pageYnum !== 0
+        // ? " hidden"
+        // :
+        " w-[100%] h-[3rem] flex text-white justify-center items-center"
       }`}
       style={{ backgroundColor: "#000000", opacity: "70%" }}
       ref={footerRef}

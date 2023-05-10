@@ -1,8 +1,15 @@
 import React from "react";
-
-const Box = ({ content, setShowLearningUnit }) => {
+import { useNavigate } from "react-router-dom";
+const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
+  const go = useNavigate();
   const showUnit = () => {
     if (content === "學習區") setShowLearningUnit(true);
+    if (content === "練習區") {
+      go("/practice");
+    }
+    if (content === "測驗區") {
+      go("/Examination");
+    }
   };
 
   return (

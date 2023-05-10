@@ -12,11 +12,30 @@ const Learning = () => {
   const setVideoNum = (number) => {
     setVideo(number);
   };
-  const unit1 = ["幫忙", "算", "開始", "連續", "下一個", "公園"];
+  const unit1 = [
+    "公園",
+    "幫/幫忙/幫助",
+    "算",
+    "下一個",
+    "開始",
+    "連續",
+    "完",
+    "十一",
+    "十二",
+    "二十",
+    "二十一",
+    "三十",
+    "四十",
+    "五十",
+    "六十",
+    "百",
+    "做",
+    "那/那裡",
+  ];
   return (
     <>
       {" "}
-      <NavComponents />
+      <NavComponents needIcon={true} />
       <div className="flex flex-wrap h-[80vh] px-[auto] justify-center min-h-[80vh] my-4">
         <div className="left w-[350px]  flex flex-col justify-center items-center">
           <div className="flex justify-center items-center bg-[#20639E] w-[250px] h-[3rem] rounded-t-lg text-white text-[1.5rem]">
@@ -38,7 +57,7 @@ const Learning = () => {
         </div>
         <div className="flex items-center right w-[724px] my-4 ">
           <video
-            src={require(`../../video/unit1/${video}.mp4`)}
+            src={require(`./video/unit1/${video}.mp4`)}
             className=" w-[800px] h-[410px]"
             autoplay="true"
             controls="true"
