@@ -108,9 +108,7 @@ const Practice = () => {
     // 重新啟動攝影機
     setTime(3);
     setTime2(5);
-    setQuestion((q) => {
-      return q + 1;
-    });
+    setUnit(null);
   }
 
   function mediaRecorderSetup() {
@@ -197,7 +195,7 @@ const Practice = () => {
 
   useEffect(() => {
     mediaRecorderSetup();
-  }, [question]);
+  }, [nowWords]);
 
   return (
     <>
