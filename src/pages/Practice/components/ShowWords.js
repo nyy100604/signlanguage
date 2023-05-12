@@ -1,9 +1,16 @@
 import React from "react";
 
-const ShowWords = ({ words, handleShoswSelect, setNowWords, wordsIndex }) => {
+const ShowWords = ({
+  words,
+  handleShoswSelect,
+  setNowWords,
+  wordsIndex,
+  handleNextQuestion,
+}) => {
   let wordsHandler = () => {
     setNowWords(wordsIndex);
     handleShoswSelect();
+    handleNextQuestion();
   };
   console.log(wordsIndex);
   return (

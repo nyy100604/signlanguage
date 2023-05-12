@@ -15,6 +15,11 @@ const Practice = () => {
     useWords();
   const [viewReview, setViewReview] = useState(false);
   const [shoswSelect, setShowSelect] = useState(false);
+  const [nextQuestion, setNextQuestion] = useState(false);
+
+  const handleNextQuestion = () => {
+    setNextQuestion(!nextQuestion);
+  };
 
   const handleRevewVideo = () => {
     setViewReview(!viewReview);
@@ -108,7 +113,7 @@ const Practice = () => {
     // 重新啟動攝影機
     setTime(3);
     setTime2(5);
-    setUnit(null);
+    handleNextQuestion();
   }
 
   function mediaRecorderSetup() {
@@ -195,7 +200,7 @@ const Practice = () => {
 
   useEffect(() => {
     mediaRecorderSetup();
-  }, [nowWords]);
+  }, [nextQuestion]);
 
   return (
     <>
@@ -217,6 +222,7 @@ const Practice = () => {
           unit={unit}
           unitname={unitname}
           setUnitname={setUnitname}
+          handleNextQuestion={handleNextQuestion}
         />
       )}
       <div className="min-h-[85vh] flex  flex-wrap">
@@ -263,7 +269,7 @@ const Practice = () => {
               className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.7rem] px-[1rem]"
               onClick={onReset}
             >
-              下一題
+              再來一次
             </button>
           )}
           {time2 == 0 && !accuracyNum && (

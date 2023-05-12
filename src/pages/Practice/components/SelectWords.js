@@ -7,7 +7,7 @@ const SelectWords = ({
   handleShoswSelect,
   setUnit,
   setNowWords,
-
+  handleNextQuestion,
   setUnitname,
 }) => {
   function selectUnitWords(num) {
@@ -70,6 +70,7 @@ const SelectWords = ({
                   handleShoswSelect={handleShoswSelect}
                   setNowWords={setNowWords}
                   wordsIndex={index}
+                  handleNextQuestion={handleNextQuestion}
                 />
               );
             })}

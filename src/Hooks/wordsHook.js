@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export const useWords = () => {
   const [unit, setUnit] = useState(null);
-  const [nowWords, setNowWords] = useState(0);
+  const [nowWords, setNowWords] = useState(null);
   const [unitname, setUnitname] = useState("");
   return [unitname, setUnitname, unit, setUnit, nowWords, setNowWords];
 };
