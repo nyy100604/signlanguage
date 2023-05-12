@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from "react";
 import NavComponents from "../../components/NavComponents";
 import Footer from "../../components/Footer";
+import ReviewVideo from "./components/ReviewVideo";
+import SelectWords from "./components/SelectWords";
 import axios from "axios";
+import { VscPlayCircle } from "react-icons/vsc";
+import { VscChevronRight } from "react-icons/vsc";
+import { useWords } from "../../Hooks/wordsHook";
 
 // 第一次啟動攝影機
 
 const Practice = () => {
-  let words = [
-    "公園",
-    "幫忙",
-    "算",
-    "下一個",
-    "開始",
-    "連續",
-    "完",
-    "11",
-    "12",
-    "20",
-    "21",
-    "30",
-    "40",
-    "50",
-    "60",
-    "100",
-    "做",
-    "那/那裡",
-  ];
+  let [unitname, setUnitname, unit, setUnit, nowWords, setNowWords] =
+    useWords();
+  const [viewReview, setViewReview] = useState(false);
+  const [shoswSelect, setShowSelect] = useState(false);
+  const [nextQuestion, setNextQuestion] = useState(false);
+
+  const handleNextQuestion = () => {
+    setNextQuestion(!nextQuestion);
+  };
+
+  const handleRevewVideo = () => {
+    setViewReview(!viewReview);
+  };
+
+  const handleShoswSelect = () => {
+    setShowSelect(!shoswSelect);
+  };
+
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
   let [wait, setWait] = useState(false);
@@ -40,9 +43,6 @@ const Practice = () => {
   // let outputVideoURL = null;
 
   function start() {
-    // mediaRecorderSetup();
-    // console.log(mediaRecorder);
-
     let intetval1 = setInterval(() => {
       setWait(true);
       time--;
@@ -113,9 +113,7 @@ const Practice = () => {
     // 重新啟動攝影機
     setTime(3);
     setTime2(5);
-    setQuestion((q) => {
-      return q + 1;
-    });
+    handleNextQuestion();
   }
 
   function mediaRecorderSetup() {
@@ -173,12 +171,10 @@ const Practice = () => {
           // outputVideo.controls = true;
           var file = new File(chunks, "video.mp4", { type: "video/mp4" });
           chunks = [];
-          // outputVideoURL = URL.createObjectURL(blob);
-          // console.log(outputVideoURL);
-          // outputVideo.src = outputVideoURL;
+
           var formData = new FormData();
           formData.append("file", file);
-          // const apiUrl = "http://localhost:5000/upload";
+          //add a the action name, type as a string.
 
           const response = await axios.post(
             "http://localhost:5000/upload",
@@ -204,18 +200,49 @@ const Practice = () => {
 
   useEffect(() => {
     mediaRecorderSetup();
-  }, [question]);
+  }, [nextQuestion]);
 
   return (
     <>
       {" "}
       <NavComponents needIcon={true} />
+      {viewReview && (
+        <ReviewVideo
+          handleRevewVideo={handleRevewVideo}
+          unit={unit}
+          nowWords={nowWords}
+          unitname={unitname}
+        />
+      )}
+      {shoswSelect && (
+        <SelectWords
+          handleShoswSelect={handleShoswSelect}
+          setUnit={setUnit}
+          setNowWords={setNowWords}
+          unit={unit}
+          unitname={unitname}
+          setUnitname={setUnitname}
+          handleNextQuestion={handleNextQuestion}
+        />
+      )}
       <div className="min-h-[85vh] flex  flex-wrap">
         <div className="left flex flex-col justify-center items-center relative w-[1000px] mt-[2rem]">
           {" "}
-          <p className=" text-[1.5rem]">{`${question}、${
-            words[question - 1]
-          }`}</p>
+          <p className="flex justify-center items-center text-[1.5rem] mb-2">
+            <span
+              className="text-white bg-black w-[20rem] flex items-center justify-center mr-[1rem] rounded-lg cursor-pointer"
+              onClick={handleShoswSelect}
+            >
+              {/* //改 */}
+              {unit && `${unit[nowWords]}`}
+              {!unit && `請選擇手語動作`}
+              <VscChevronRight />
+            </span>
+            <span className="text-[2rem] cursor-pointer">
+              {" "}
+              <VscPlayCircle onClick={handleRevewVideo} />
+            </span>
+          </p>
           <video
             id="inputVideo"
             alt="在這裡錄影"
@@ -242,7 +269,7 @@ const Practice = () => {
               className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.7rem] px-[1rem]"
               onClick={onReset}
             >
-              下一題
+              再來一次
             </button>
           )}
           {time2 == 0 && !accuracyNum && (
