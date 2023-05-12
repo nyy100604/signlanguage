@@ -174,6 +174,8 @@ const Practice = () => {
 
           var formData = new FormData();
           formData.append("file", file);
+          formData.append("words",unit[nowWords]);
+          console.log(unit[nowWords])
           //add a the action name, type as a string.
 
           const response = await axios.post(
