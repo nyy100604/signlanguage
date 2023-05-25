@@ -32,7 +32,6 @@ const Practice = () => {
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
   let [wait, setWait] = useState(false);
-  let [question, setQuestion] = useState(1);
   let [recording, setRecording] = useState(false);
   const [accuracyNum, setAccuracyNum] = useState(null);
   /**
@@ -174,8 +173,8 @@ const Practice = () => {
 
           var formData = new FormData();
           formData.append("file", file);
-          formData.append("words",unit[nowWords]);
-          console.log(unit[nowWords])
+          formData.append("words", unit[nowWords]);
+          console.log(unit[nowWords]);
           //add a the action name, type as a string.
 
           const response = await axios.post(
