@@ -19,9 +19,9 @@ const Main = () => {
       <div>
         <NavComponents needIcon={false} />
         <main className="min-h-[85vh] flex flex-col items-center justify-around text-[5rem]">
-          <div className="text-[1rem] bg-slate-500  ">
+          <div className="text-[1rem] bg-slate-500 mt-12  ">
             <img 
-              src={STImage} alt="Sign Website Icon" style={{ width: '250px', height: '250px' }} />
+              src={STImage} alt="Sign Website Icon" style={{ width: '225px', height: '225px'  }} />
           </div>
    
 
