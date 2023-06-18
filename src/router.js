@@ -3,6 +3,9 @@ import Homepage from "./pages/Homepage";
 import Learning from "./pages/Learning";
 import Practice from "./pages/Practice";
 import Examination from "./pages/Examination";
+import SignIn from "./pages/signIn";
+import SignUp from "./pages/signUp";
+
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,14 @@ const router = createBrowserRouter([
   {
     path: "/Examination",
     element: <Examination />,
+  },
+  {
+    path: "/SignIn",
+    element: <SignIn />,
+  },
+  {
+    path: "/SignUp",
+    element: <SignUp />,
   },
 ]);
 
