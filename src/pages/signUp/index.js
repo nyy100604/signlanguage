@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import NavComponents from "../../components/NavComponents";
+import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-  const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -20,71 +24,79 @@ const SignupForm = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
     // 構建請求體
     const requestData = {
       id: username,
       name: name,
-      pwd: password
+      pwd: password,
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/sign_up', requestData);
+      const response = await axios.post(
+        "http://localhost:5000/sign_up",
+        requestData
+      );
 
-      if (response.data === 'True') {
-        setMessage('註冊成功');
+      if (response.data === "True") {
+        setMessage("註冊成功");
+        navigate("/SignIn");
       } else {
-        setMessage('註冊失敗');
+        setMessage("註冊失敗");
       }
     } catch (error) {
-      setMessage('請求失敗');
+      setMessage("請求失敗");
       console.error(error);
     }
 
     // 清空輸入欄位
-    setUsername('');
-    setName('');
-    setPassword('');
+    setUsername("");
+    setName("");
+    setPassword("");
   };
 
   return (
     <div>
-      <h2>註冊</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">學號</label>
+      <NavComponents />
+      <div className="flex  justify-center items-center h-[90vh] ">
+        {" "}
+        <div className=" shadow-2xl rounded-lg m-[2rem] text-[2rem] w-[60%] h-[70%] flex flex-col justify-evenly items-center">
+          {" "}
+          <h2 className="py-[0.4rem]">註冊</h2>
           <input
             type="text"
             id="username"
+            placeholder="輸入學號"
             value={username}
             onChange={handleUsernameChange}
-            style={{ border: '1px solid black' }}
+            className="w-[70%] border-inherit border-2 rounded-lg"
           />
-        </div>
-        <div>
-          <label htmlFor="name">姓名:</label>
           <input
             type="text"
             id="name"
+            placeholder="輸入姓名"
             value={name}
             onChange={handleNameChange}
-            style={{ border: '1px solid black' }}
+            className="w-[70%] border-inherit border-2 rounded-lg"
           />
-        </div>
-        <div>
-          <label htmlFor="password">密碼:</label>
           <input
             type="password"
             id="password"
+            placeholder="輸入密碼"
             value={password}
             onChange={handlePasswordChange}
-            style={{ border: '1px solid black' }}
+            className="w-[70%] border-inherit border-2 rounded-lg"
           />
+          <button
+            type="submit"
+            className="bg-[#20639E] px-[0.5rem] py-[0.5rem] rounded-lg text-white"
+            onClick={handleSubmit}
+          >
+            送出資料
+          </button>
+          {message && <p>{message}</p>}
         </div>
-        <button type="submit" style={{ border: '1px solid black' }}>註冊</button>
-      </form>
-      {message && <p>{message}</p>}
+      </div>
+      <Footer />
     </div>
   );
 };

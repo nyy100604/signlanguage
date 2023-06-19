@@ -1,16 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
-import Homepage from "./pages/Homepage";
+import SelectPage from "./pages/SelectPage";
 import Learning from "./pages/Learning";
 import Practice from "./pages/Practice";
 import Examination from "./pages/Examination";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
-
+import HomePages from "./pages/Homepages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Homepage />,
+    element: <HomePages />,
+  },
+  {
+    path: "/select",
+    element: <SelectPage />,
   },
   {
     path: "/learning/:id",
