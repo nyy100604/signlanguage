@@ -9,6 +9,7 @@ const SignupForm = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const handleUsernameChange = (event) => {
@@ -23,7 +24,19 @@ const SignupForm = () => {
     setPassword(event.target.value);
   };
 
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
+
+    event.preventDefault();
+
+    // 檢查密碼是否一致
+    if (password !== confirmPassword) {
+      setMessage("密碼不一致");
+      return;
+    }
     // 構建請求體
     const requestData = {
       id: username,
@@ -52,6 +65,7 @@ const SignupForm = () => {
     setUsername("");
     setName("");
     setPassword("");
+    setConfirmPassword("");
   };
 
   return (
@@ -84,6 +98,14 @@ const SignupForm = () => {
             placeholder="輸入密碼"
             value={password}
             onChange={handlePasswordChange}
+            className="w-[70%] border-inherit border-2 rounded-lg"
+          />
+           <input
+            type="password"
+            id="confirmPassword"
+            placeholder="再次輸入密碼"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
             className="w-[70%] border-inherit border-2 rounded-lg"
           />
           <button
