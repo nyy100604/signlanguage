@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import { unit1 } from "../../Hooks/wordsHook";
 
+
 // 第一次啟動攝影機
 
 const Practice = () => {
@@ -159,10 +160,12 @@ const Practice = () => {
           // outputVideo.src = outputVideoURL;
           var formData = new FormData();
           formData.append("file", file);
+          formData.append("words", unit1[question-1]);
+          console.log(unit1[question-1]);
           // const apiUrl = "http://localhost:5000/upload";
 
           const response = await axios.post(
-            "http://localhost:5000/upload",
+            "http://localhost:5000/exam",
             formData,
             {
               headers: {
@@ -171,6 +174,7 @@ const Practice = () => {
             }
           );
           console.log(response.data);
+          setAccuracyNum(response.data);
         }
       })
       .catch(function (error) {
