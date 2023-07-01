@@ -304,7 +304,7 @@ const Practice = () => {
           {recording && (
             <p className="text-[2rem] mt-5">{`剩餘秒數： ${time2}`}</p>
           )}
-          {accuracyNum && <p className=" mt-[0.5rem]">分數為：{accuracyNum}</p>}
+          {accuracyNum && <p className=" mt-[0.5rem]">你的分數評語：{accuracyNum}</p>}
         </div>
       </div>
       <Footer />
