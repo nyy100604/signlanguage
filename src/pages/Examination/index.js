@@ -15,6 +15,7 @@ const Practice = () => {
   let [recording, setRecording] = useState(false);
   const [accuracyNum, setAccuracyNum] = useState(null);
   let [wait, setWait] = useState(false);
+
   /**
    * MediaRecorder Related Event Handler
    */
@@ -158,6 +159,26 @@ const Practice = () => {
           // outputVideoURL = URL.createObjectURL(blob);
           // console.log(outputVideoURL);
           // outputVideo.src = outputVideoURL;
+
+          var id = localStorage.getItem("id");
+          console.log("hello", id);
+          // 使用AJAX發送POST請求
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "http://localhost:5000/data",true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.onreadystatechange = function() {
+         if (xhr.readyState === 4 && xhr.status === 200) {
+           // 請求成功，可以處理後端返回的結果
+          var response = JSON.parse(xhr.responseText);
+            console.log(response);
+            }
+          };
+
+          var data = JSON.stringify({ id: id });
+          xhr.send(data);
+
+
           var formData = new FormData();
           formData.append("file", file);
           formData.append("words", unit1[question-1]);

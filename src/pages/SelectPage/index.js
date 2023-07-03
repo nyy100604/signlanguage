@@ -11,6 +11,11 @@ const Main = () => {
   const [showLearningUnit, setShowLearningUnit] = useState(false);
   const [showPractice, setShowPractice] = useState(false);
 
+  const handleLogout = () => {
+    // 执行登出逻辑
+    console.log("用户已登出");
+  };
+
   return (
     <>
       <div>

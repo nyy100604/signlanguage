@@ -10,3 +10,20 @@
 body {
   height: 100%;
 }
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* 距離上方的距離，這裡設定為下拉選單下方 */
+  left: 75%; /* 距離左側的距離，這裡設定為與父元素左對齊 */
+}
+
+.dropdown-menu-item {
+  padding: 0.5rem;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdown-menu-item:hover {
+  background-color: #f2f2f2;
+}
