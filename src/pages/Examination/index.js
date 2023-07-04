@@ -15,10 +15,6 @@ const Practice = () => {
   let [recording, setRecording] = useState(false);
   const [accuracyNum, setAccuracyNum] = useState(null);
   let [wait, setWait] = useState(false);
-<<<<<<< HEAD
-=======
-  
->>>>>>> 41c91b783f7a54adc01c88aa818f99d197ed8ea4
   /**
    * MediaRecorder Related Event Handler
    */
@@ -155,7 +151,6 @@ const Practice = () => {
             console.log("Close Camera");
             track.stop();
           });
-<<<<<<< HEAD
           
           //----------------------------------
           var id = localStorage.getItem("id");
@@ -164,19 +159,6 @@ const Practice = () => {
           var file = new File(chunks, "video.mp4", { type: "video/mp4" });
           chunks = [];
  
-=======
-
-          // outputVideo.controls = true;
-          var file = new File(chunks, "video.mp4", { type: "video/mp4" });
-          chunks = [];
-          // outputVideoURL = URL.createObjectURL(blob);
-          // console.log(outputVideoURL);
-          // outputVideo.src = outputVideoURL;
-
-
-          var id = localStorage.getItem('id');
-          id = String('id')
->>>>>>> 41c91b783f7a54adc01c88aa818f99d197ed8ea4
           var formData = new FormData();
           formData.append('user_id',id);
           formData.append("file", file);
