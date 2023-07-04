@@ -49,7 +49,7 @@ const Learning2 = () => {
         </div>
         <div className="flex items-center right w-[724px] my-4 ">
           <video
-            src={require(`./video/unit2/${video}.mp4`)}
+            // src={require(`./video/unit2/${video}.mp4`)}
             className=" w-[800px] h-[410px]"
             autoplay="true"
             controls="true"
