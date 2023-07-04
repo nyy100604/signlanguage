@@ -19,27 +19,27 @@ const DropdownMenu = () => {
 
   return (
     <div className="dropdown">
-       <ImFilm
+      <ImFilm
         className="hover:drop-shadow-md cursor-pointer"
         onClick={handleToggle}
       />
-            {isOpen && (
+      {isOpen && (
         <ul className="dropdown-menu">
           <li
             className="dropdown-menu-item"
-            onClick={() => handleOptionClick('/learning/1')}
+            onClick={() => handleOptionClick("/learning/1")}
           >
             單元1
           </li>
           <li
             className="dropdown-menu-item"
-            onClick={() => handleOptionClick('/learning/2')}
+            onClick={() => handleOptionClick("/learning/2")}
           >
             單元2
           </li>
           <li
             className="dropdown-menu-item"
-            onClick={() => handleOptionClick('/learning/3')}
+            onClick={() => handleOptionClick("/learning/3")}
           >
             單元3
           </li>
@@ -80,11 +80,11 @@ const NavComponents = ({ needIcon }) => {
                 onClick={() => {
                   go("/practice");
                 }}
-              />
+              />{" "}
+              {/* 加入下拉式選單 */}
+              <DropdownMenu />
             </>
           )}
-          {/* 加入下拉式選單 */}
-          <DropdownMenu />
         </div>
       </div>
     </header>
