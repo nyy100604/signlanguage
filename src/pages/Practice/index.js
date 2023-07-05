@@ -16,11 +16,10 @@ const Practice = () => {
   const [viewReview, setViewReview] = useState(false);
   const [shoswSelect, setShowSelect] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(false);
-
+  console.log(unitname)
   const handleNextQuestion = () => {
     setNextQuestion(!nextQuestion);
   };
-
   const handleRevewVideo = () => {
     setViewReview(!viewReview);
   };
@@ -174,7 +173,8 @@ const Practice = () => {
           var formData = new FormData();
           formData.append("file", file);
           formData.append("words", unit[nowWords]);
-          console.log(unit[nowWords]);
+          formData.append("unit", unitname);
+          // console.log(unit[nowWords]);
           //add a the action name, type as a string.
 
           const response = await axios.post(
