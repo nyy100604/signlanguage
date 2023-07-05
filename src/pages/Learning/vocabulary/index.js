@@ -8,7 +8,7 @@ const Vocabulary = ({ vocabulary, setVideoNum, num }) => {
         setVideoNum(num);
       }}
     >
-      {vocabulary}
+      {num + 1}. {vocabulary}
     </div>
   );
 };

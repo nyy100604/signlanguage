@@ -41,7 +41,8 @@ const Learning = () => {
           <div className="flex justify-center items-center bg-[#20639E] w-[250px] h-[3rem] rounded-t-lg text-white text-[1.5rem]">
             單元 1 詞彙
           </div>{" "}
-          <div className="bg-[#C6D8EA] flex flex-col  cursor-pointer items-center overflow-scroll w-[250px] h-[350px] text-[2rem]">
+          <div className="bg-[#C6D8EA] flex flex-col  pl-[10px] cursor-pointer  overflow-scroll w-[250px] h-[350px] text-[2rem]">
+            
             {" "}
             {unit1.map((word, index) => {
               console.log(index);
@@ -50,6 +51,7 @@ const Learning = () => {
                   vocabulary={word}
                   setVideoNum={setVideoNum}
                   num={index}
+                  key={index} // 添加 key 属性
                 />
               );
             })}

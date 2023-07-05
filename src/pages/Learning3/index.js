@@ -34,7 +34,7 @@ const Learning3 = () => {
           <div className="flex justify-center items-center bg-[#20639E] w-[250px] h-[3rem] rounded-t-lg text-white text-[1.5rem]">
             單元 3 詞彙
           </div>{" "}
-          <div className="bg-[#C6D8EA] flex flex-col  cursor-pointer items-center overflow-scroll w-[250px] h-[350px] text-[2rem]">
+          <div className="bg-[#C6D8EA] flex flex-col  cursor-pointer pl-[10px] overflow-scroll w-[250px] h-[350px] text-[2rem]">
             {" "}
             {unit3.map((word, index) => {
               console.log(index);
@@ -43,6 +43,7 @@ const Learning3 = () => {
                   vocabulary={word}
                   setVideoNum={setVideoNum}
                   num={index}
+                  key={index} 
                 />
               );
             })}
