@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImHome, ImFilm } from "react-icons/im";
-import { MdAccessibilityNew } from "react-icons/md";
 import { SiHandshake } from "react-icons/si";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
+import { BsPersonGear } from "react-icons/bs";
+import { GiVideoConference } from "react-icons/gi";
+
 
 
 const NavComponents = ({ needIcon }) => {
   const go = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+  };
   const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+   
   
     const handleToggle = () => {
       setIsOpen(!isOpen);
@@ -23,8 +32,9 @@ const NavComponents = ({ needIcon }) => {
   
     return (
       <div className="dropdown">
-         <ImFilm
-          className="hover:drop-shadow-md cursor-pointer"
+        <div className="film-icon-container">
+         <GiVideoConference
+          className="hover:drop-shadow-md cursor-pointer element-class" 
           onClick={handleToggle}
         />
               {isOpen && (
@@ -50,6 +60,7 @@ const NavComponents = ({ needIcon }) => {
           </ul>
         )}
       </div>
+      </div>
     );
   };
 
@@ -71,30 +82,31 @@ const NavComponents = ({ needIcon }) => {
           {needIcon && (
             <>
               <ImHome
-                className="hover:drop-shadow-md"
+                className="hover:drop-shadow-md element-class"
                 onClick={() => {
                   go("/select");
                 }}
               />
-              <MdAccessibilityNew
-                className="hover:drop-shadow-md"
+               <DropdownMenu />
+              <BsPersonGear
+                className="hover:drop-shadow-md element-class"
                 onClick={() => {
                   go("/practice");
 
                 }}
               />
               <HiArrowRightOnRectangle
-               className="hover:drop-shadow-md"
+               className="hover:drop-shadow-md element-class"
                onClick={() => {
-                 go("/practice");
-
-               }}
+                  handleLogout();
+                  go("/signIn");
+                }}
              />
+            
             </>
           )}
          
-          {/* 加入下拉式選單 */}
-          <DropdownMenu />
+         
         </div>
       </div>
     </header>
