@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImHome, ImFilm } from "react-icons/im";
 import { MdAccessibilityNew } from "react-icons/md";
-import { SiHandshake } from "react-icons/si";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 
 
@@ -54,7 +53,7 @@ const NavComponents = ({ needIcon }) => {
   };
 
   return (
-    <header className="bg-[#20639E] sticky top-0 z-50 font-bold text-2xl px-[1rem] py-[1rem] hover:drop-shadow-xl text-white">
+    <header className="bg-[#124c8a] sticky top-0 z-50 font-bold text-2xl px-[1rem] py-[1rem] hover:drop-shadow-xl text-white">
       <div className="flex flex-col items-center justify-center max-w-full h-[4.5rem] md:flex md:flex-row md:justify-between md:max-w-[1022px] md:mx-[auto]">
         <div className="cursor-pointer">
           <span
@@ -63,7 +62,7 @@ const NavComponents = ({ needIcon }) => {
               go("/select");
             }}
           >
-            <SiHandshake className="mr-1" />
+            <img src="./logo.jpg" alt="Logo" className="mr-1" style={{ width: "100px", height: "100px" }} />
             AI手語助學網站
           </span>
         </div>

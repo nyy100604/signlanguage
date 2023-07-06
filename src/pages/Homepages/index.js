@@ -1,6 +1,6 @@
 import React from "react";
 
-import STImage from "./ST.jpg";
+import STImage from "./logo.jpg";
 import { useNavigate } from "react-router-dom";
 
 const HomePages = () => {

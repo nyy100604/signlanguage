@@ -161,7 +161,7 @@ const SignupForm = () => {
           </div>
           <button
             type="submit"
-            className="bg-[#20639E] px-[0.5rem] py-[0.5rem] rounded-lg text-white"
+            className="bg-[#124c8a] px-[0.5rem] py-[0.5rem] rounded-lg text-white"
             onClick={handleSubmit}
           >
             送出資料
