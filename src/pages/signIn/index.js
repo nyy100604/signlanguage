@@ -105,7 +105,7 @@ const LoginForm = () => {
                   </p>
                   <button
                     onClick={handleLogout}
-                    className="text-[2rem] mt-[3rem] rounded-lg bg-[#20639E] py-[0.7rem] px-[1rem] text-white"
+                    className="text-[2rem] mt-[3rem] rounded-lg bg-[#124c8a] py-[0.7rem] px-[1rem] text-white"
                   >
                     登出
                   </button>
@@ -131,7 +131,7 @@ const LoginForm = () => {
                   <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="text-[2rem] mt-[3rem] rounded-lg bg-[#20639E] py-[0.7rem] px-[1rem] text-white"
+                    className="text-[2rem] mt-[3rem] rounded-lg bg-[#124c8a] py-[0.7rem] px-[1rem] text-white"
                   >
                     登入
                   </button>
