@@ -16,6 +16,8 @@ const Main = () => {
     console.log("用户已登出");
   };
 
+  
+
   return (
     <>
       <div>
@@ -28,6 +30,7 @@ const Main = () => {
               style={{ width: "225px", height: "225px" }}
             />
           </div>
+          
           <div className="flex text-[2rem] flex-wrap justify-center">
             {wbesiteContent.map((theme) => (
               <Box
