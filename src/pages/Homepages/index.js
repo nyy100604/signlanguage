@@ -19,7 +19,7 @@ const HomePages = () => {
             <button
               className="px-[0.7rem] py-[0.5rem] mr-[1rem] bg-[#004D8F] rounded-lg text-white hover:bg-[#136DBA]"
               onClick={() => {
-                navigate("/signup");
+                navigate("/signUp");
               }}
             >
               註冊
@@ -27,7 +27,7 @@ const HomePages = () => {
             <button
               className="px-[0.7rem] py-[0.5rem] rounded-lg hover:bg-slate-300"
               onClick={() => {
-                navigate("/signin");
+                navigate("/signIn");
               }}
             >
               登入
