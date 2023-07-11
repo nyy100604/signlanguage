@@ -16,11 +16,10 @@ const Practice = () => {
   const [viewReview, setViewReview] = useState(false);
   const [shoswSelect, setShowSelect] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(false);
-
+  console.log(unitname)
   const handleNextQuestion = () => {
     setNextQuestion(!nextQuestion);
   };
-
   const handleRevewVideo = () => {
     setViewReview(!viewReview);
   };
@@ -174,7 +173,8 @@ const Practice = () => {
           var formData = new FormData();
           formData.append("file", file);
           formData.append("words", unit[nowWords]);
-          console.log(unit[nowWords]);
+          formData.append("unit", unitname);
+          // console.log(unit[nowWords]);
           //add a the action name, type as a string.
 
           const response = await axios.post(
@@ -226,8 +226,8 @@ const Practice = () => {
           handleNextQuestion={handleNextQuestion}
         />
       )}
-      <div className="min-h-[85vh] flex  flex-wrap">
-        <div className="left flex flex-col justify-center items-center relative w-[1000px] mt-[2rem]">
+      <div className="min-h-[85vh] flex">
+        <div className="left flex flex-col justify-center items-center relative w-[900px] mt-[2rem]">
           {" "}
           <p className="flex justify-center items-center text-[1.5rem] mb-2">
             <span
@@ -255,7 +255,7 @@ const Practice = () => {
           <p className=" absolute top-[50%] text-white text-[3.5rem]">{time}</p>
         </div>
 
-        <div className="right flex items-center w-[100%] justify-center flex-col  w-[240px] mt-[2rem]">
+        <div className="right flex items-center w-[400px] justify-center flex-col  w-[240px] mt-[2rem]">
           {" "}
           {time == 3 && (
             <button
@@ -304,7 +304,7 @@ const Practice = () => {
           {recording && (
             <p className="text-[2rem] mt-5">{`剩餘秒數： ${time2}`}</p>
           )}
-          {accuracyNum && <p className=" mt-[0.5rem]">你的分數評語：{accuracyNum}</p>}
+          {accuracyNum && <p className=" text-[1.5rem] text-center mt-[0.5rem]">你的分數評語：{accuracyNum}</p>}
         </div>
       </div>
       <Footer />

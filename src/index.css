@@ -13,8 +13,9 @@ body {
 
 .dropdown-menu {
   position: absolute;
-  top: 100%; /* 距離上方的距離，這裡設定為下拉選單下方 */
-  left: 75%; /* 距離左側的距離，這裡設定為與父元素左對齊 */
+  top: calc(100% + 40px); /* 距離上方的距離，這裡設定為下拉選單下方 */
+  /* 距離左側的距離，這裡設定為與父元素左對齊 */
+  width: 85px;
 }
 
 .dropdown-menu-item {
@@ -27,3 +28,16 @@ body {
 .dropdown-menu-item:hover {
   background-color: #f2f2f2;
 }
+
+.dropdown {
+  position: relative;
+}
+
+.film-icon-container {
+  position: relative;
+}
+
+.element-class:hover {
+  color: rgb(144, 205, 241); /* 更改所需的顏色 */
+}
+
