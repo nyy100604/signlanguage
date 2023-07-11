@@ -16,11 +16,29 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
   };
   let image;
   if (content === "學習區") {
-    image = <img src={LearnIcon} alt="Image 1" style={{ width: '150px', height: '150px' }}/>;
+    image = (
+      <img
+        src={LearnIcon}
+        alt="Image 1"
+        style={{ width: "150px", height: "150px" }}
+      />
+    );
   } else if (content === "練習區") {
-    image = <img src={PracticeIcon} alt="Image 2" style={{ width: '150px', height: '150px' }}/>;
+    image = (
+      <img
+        src={PracticeIcon}
+        alt="Image 2"
+        style={{ width: "150px", height: "150px" }}
+      />
+    );
   } else if (content === "測驗區") {
-    image = <img src={TestIcon} alt="Image 3" style={{ width: '150px', height: '150px' }}/>;
+    image = (
+      <img
+        src={TestIcon}
+        alt="Image 3"
+        style={{ width: "150px", height: "150px" }}
+      />
+    );
   }
 
   //const boxImage = <img src={TestIcon} alt="Test Icon "style={{ width: '150px', height: '150px' }} /> ;
@@ -28,13 +46,12 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
   //const boxImage3 = <img src={PracticeIcon} alt="Practice Icon "style={{ width: '150px', height: '150px' }} /> ;
   return (
     <div
-      className="bg-[#C6D8EA] text-[3rem] rounded-lg p-[3.5rem] m-[1.5rem]  cursor-pointer"
+      className="bg-[#C6D8EA] text-[3rem] rounded-lg p-[3.5rem] m-[1.5rem] cursor-pointer hover:scale-110 duration-300"
       onClick={showUnit}
     >
       {image}
       <span className="text-[3rem]">{content}</span>
     </div>
-    
   );
 };
 

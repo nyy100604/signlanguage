@@ -15,15 +15,11 @@ const Main = () => {
     console.log("用户已登出");
   };
 
-  
-
   return (
     <>
       <div>
         <NavComponents needIcon={false} />
         <main className="min-h-[85vh] flex flex-col items-center justify-around text-[5rem]">
-          
-          
           <div className="flex text-[2rem] flex-wrap justify-center">
             {wbesiteContent.map((theme) => (
               <Box
