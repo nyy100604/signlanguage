@@ -42,7 +42,6 @@ const Learning = () => {
             單元 1 詞彙
           </div>{" "}
           <div className="bg-[#C6D8EA] flex flex-col  pl-[10px] cursor-pointer  overflow-scroll w-[250px] h-[350px] text-[2rem]">
-            
             {" "}
             {unit1.map((word, index) => {
               console.log(index);

@@ -4,48 +4,7 @@ import { ImHome } from "react-icons/im";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import { BsPersonGear } from "react-icons/bs";
 import { GiVideoConference } from "react-icons/gi";
-
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleOptionClick = (path) => {
-    // 導航到選擇的路徑
-    navigate(path);
-  };
-
-  return (
-    <div className="dropdown">
-      <ImFilm
-        className="hover:drop-shadow-md cursor-pointer"
-        onClick={handleToggle}
-      />
-      {isOpen && (
-        <ul className="dropdown-menu">
-          <li
-            className="dropdown-menu-item"
-            onClick={() => handleOptionClick("/learning/1")}
-          >
-            單元1
-          </li>
-          <li
-            className="dropdown-menu-item"
-            onClick={() => handleOptionClick("/learning/2")}
-          >
-            單元2
-          </li>
-          <li
-            className="dropdown-menu-item"
-            onClick={() => handleOptionClick("/learning/3")}
-          >
-            單元3
-          </li>
-        </ul>
-      )}
-    </div>
-  );
-};
+import logo from "./logo.jpg";
 
 const NavComponents = ({ needIcon }) => {
   const go = useNavigate();
@@ -58,47 +17,46 @@ const NavComponents = ({ needIcon }) => {
   const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-   
-  
+
     const handleToggle = () => {
       setIsOpen(!isOpen);
     };
-  
+
     const handleOptionClick = (path) => {
       // 導航到選擇的路徑
       navigate(path);
     };
-  
+
     return (
       <div className="dropdown">
         <div className="film-icon-container">
-         <GiVideoConference
-          className="hover:drop-shadow-md cursor-pointer element-class" 
-          onClick={handleToggle}
-        />
-              {isOpen && (
-          <ul className="dropdown-menu">
-            <li
-              className="dropdown-menu-item"
-              onClick={() => handleOptionClick('/learning/1')}
-            >
-              單元1
-            </li>
-            <li
-              className="dropdown-menu-item"
-              onClick={() => handleOptionClick('/learning/2')}
-            >
-              單元2
-            </li>
-            <li
-              className="dropdown-menu-item"
-              onClick={() => handleOptionClick('/learning/3')}
-            >
-              單元3
-            </li>
-          </ul>
-        )}
-      </div>
+          <GiVideoConference
+            className="hover:drop-shadow-md cursor-pointer element-class"
+            onClick={handleToggle}
+          />
+          {isOpen && (
+            <ul className="dropdown-menu">
+              <li
+                className="dropdown-menu-item"
+                onClick={() => handleOptionClick("/learning/1")}
+              >
+                單元1
+              </li>
+              <li
+                className="dropdown-menu-item"
+                onClick={() => handleOptionClick("/learning/2")}
+              >
+                單元2
+              </li>
+              <li
+                className="dropdown-menu-item"
+                onClick={() => handleOptionClick("/learning/3")}
+              >
+                單元3
+              </li>
+            </ul>
+          )}
+        </div>
       </div>
     );
   };
@@ -113,7 +71,12 @@ const NavComponents = ({ needIcon }) => {
               go("/select");
             }}
           >
-            <img src="./logo.jpg" alt="Logo" className="mr-1" style={{ width: "100px", height: "100px" }} />
+            <img
+              src={logo}
+              alt="Logo"
+              className="mr-1"
+              style={{ width: "100px", height: "100px" }}
+            />
             AI手語助學網站
           </span>
         </div>
@@ -126,16 +89,20 @@ const NavComponents = ({ needIcon }) => {
                   go("/select");
                 }}
               />
-               <DropdownMenu />
+              <DropdownMenu />
               <BsPersonGear
                 className="hover:drop-shadow-md element-class"
                 onClick={() => {
                   go("/practice");
-
                 }}
-              />{" "}
-              {/* 加入下拉式選單 */}
-              <DropdownMenu />
+              />
+              <HiArrowRightOnRectangle
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  handleLogout();
+                  go("/signIn");
+                }}
+              />
             </>
           )}
         </div>

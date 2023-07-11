@@ -43,7 +43,7 @@ const Learning3 = () => {
                   vocabulary={word}
                   setVideoNum={setVideoNum}
                   num={index}
-                  key={index} 
+                  key={index}
                 />
               );
             })}
