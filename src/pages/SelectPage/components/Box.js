@@ -46,7 +46,7 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
   //const boxImage3 = <img src={PracticeIcon} alt="Practice Icon "style={{ width: '150px', height: '150px' }} /> ;
   return (
     <div
-      className="bg-[#C6D8EA] text-[3rem] rounded-lg p-[3.5rem] m-[1.5rem] cursor-pointer hover:scale-110 duration-300"
+      className="bg-[#C6D8EA] duration-300 text-[3rem] rounded-lg p-[3.5rem] m-[1.5rem] cursor-pointer hover:scale-110 "
       onClick={showUnit}
     >
       {image}
