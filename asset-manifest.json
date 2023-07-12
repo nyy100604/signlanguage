@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/signlanguage/static/css/main.515d6f7e.css",
-    "main.js": "/signlanguage/static/js/main.703bbdaf.js",
+    "main.js": "/signlanguage/static/js/main.5ff0c194.js",
     "static/media/10.mp4": "/signlanguage/static/media/10.378eaf9a129bffd9f7a1.mp4",
     "static/media/8.mp4": "/signlanguage/static/media/8.8cb12f76138adf1581a6.mp4",
     "static/media/12.mp4": "/signlanguage/static/media/12.4c22efccee1de55b8134.mp4",
@@ -27,10 +27,10 @@
     "static/media/LearnIcon.png": "/signlanguage/static/media/LearnIcon.62ac8b870caa58b11a62.png",
     "index.html": "/signlanguage/index.html",
     "main.515d6f7e.css.map": "/signlanguage/static/css/main.515d6f7e.css.map",
-    "main.703bbdaf.js.map": "/signlanguage/static/js/main.703bbdaf.js.map"
+    "main.5ff0c194.js.map": "/signlanguage/static/js/main.5ff0c194.js.map"
   },
   "entrypoints": [
     "static/css/main.515d6f7e.css",
-    "static/js/main.703bbdaf.js"
+    "static/js/main.5ff0c194.js"
   ]
 }
