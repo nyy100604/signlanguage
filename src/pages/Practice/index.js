@@ -294,7 +294,7 @@ const Practice = () => {
               </div>
             </div>
           )}
-          {time == 3 && (
+          {time === 3 && (
             <button
               className="rounded-lg text-white text-[1.5rem] bg-red-600 py-[0.7rem] px-[1rem]"
               onClick={start}
@@ -303,7 +303,7 @@ const Practice = () => {
             </button>
           )}
           <div className="my-2"></div> 
-          {time2 == 0 && (
+          {time2 === 0 && (
              <div className="mt-12">
             <button
               className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.5rem] px-[1rem]"
@@ -314,7 +314,7 @@ const Practice = () => {
             </div>
           )}
           <div className="my-2"></div> 
-           {time2 == 0 && (
+           {time2 === 0 && (
             <button
               className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.5rem] px-[1rem]"
               onClick={handleShowVideo}
@@ -345,6 +345,7 @@ const Practice = () => {
           )}
           {recording && (
             <img
+              alt="錄製中"
               className="w-[200px] "
               src={`${require("./picture/recording.png")}`}
             />

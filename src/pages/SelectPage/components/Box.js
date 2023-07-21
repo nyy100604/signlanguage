@@ -12,7 +12,7 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
   const go = useNavigate();
   const showUnit = () => {
     if (content === "學習區") setShowLearningUnit(true);
-    if (content === "練習區" && group != blockGroup) {
+    if (content === "練習區" && group !== blockGroup) {
       go("/practice");
     }
     if (content === "測驗區") {
@@ -24,7 +24,7 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
     image = (
       <img
         src={LearnIcon}
-        alt="Image 1"
+        alt="學習區圖示"
         style={{ width: "150px", height: "150px" }}
       />
     );
@@ -38,7 +38,7 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
       >
         <img
           src={PracticeIcon}
-          alt="Image 2"
+          alt="練習區鎖定圖示"
           style={{ width: "150px", height: "150px" }}
         />
         {tooltipVisible && (
@@ -52,7 +52,7 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
       image = (
         <img
             src={PracticeIcon}
-            alt="Image 2"
+            alt="練習區圖示"
             style={{ width: "150px", height: "150px" }}
         />
       )
@@ -62,7 +62,7 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
     image = (
       <img
         src={TestIcon}
-        alt="Image 3"
+        alt="測驗區圖示"
         style={{ width: "150px", height: "150px" }}
       />
     );

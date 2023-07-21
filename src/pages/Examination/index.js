@@ -220,7 +220,7 @@ const Examination = () => {
 
         <div className="right flex items-center w-[100%] justify-center flex-col  w-[240px] mt-[2rem]">
           {" "}
-          {time == 3 && (
+          {time === 3 && (
             <button
               className="rounded-lg text-white text-[1.2rem] bg-red-600 py-[0.7rem] px-[1rem]"
               onClick={start}
@@ -228,7 +228,7 @@ const Examination = () => {
               開始錄製
             </button>
           )}
-          {time2 == 0 && (
+          {time2 === 0 && (
             <button
               className="rounded-lg text-white text-[1.2rem] bg-sky-600 py-[0.7rem] px-[1rem]"
               onClick={onReset}
@@ -241,6 +241,7 @@ const Examination = () => {
             <div>
               {" "}
               <img
+                alt="錄製中"
                 className="w-[200px] "
                 src={`${require("./picture/recording.png")}`}
               />{" "}
