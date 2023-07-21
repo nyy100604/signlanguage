@@ -3,12 +3,17 @@ import NavComponents from "../../components/NavComponents";
 import Footer from "../../components/Footer";
 import axios from "axios";
 import { unit1 } from "../../Hooks/wordsHook";
+import { test1 } from "../../Hooks/wordsHook";
+import { unit2 } from "../../Hooks/wordsHook";
+import { test2 } from "../../Hooks/wordsHook";
+import { unit3 } from "../../Hooks/wordsHook";
+import { test3 } from "../../Hooks/wordsHook";
 
 
 // 第一次啟動攝影機
 
-const Practice = () => {
-  let words = unit1;
+const Examination = () => {
+  let words = test1;
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
   let [question, setQuestion] = useState(1);
@@ -249,4 +254,4 @@ const Practice = () => {
   );
 };
 
-export default Practice;
+export default Examination;
