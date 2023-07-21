@@ -32,7 +32,7 @@ const Learning2 = () => {
           <div className="flex justify-center items-center bg-[#124c8a] w-[250px] h-[3rem] rounded-t-lg text-white text-[1.5rem]">
             單元 2 詞彙
           </div>{" "}
-          <div className="bg-[#C6D8EA] flex flex-col  cursor-pointer pl-[10px] overflow-scroll w-[250px] h-[350px] text-[2rem]">
+          <div className="bg-[#C6D8EA] flex flex-col  cursor-pointer pl-[10px] overflow-scroll w-[250px] h-[350px] text-[1.5rem]">
             {" "}
             {unit2.map((word, index) => {
               console.log(index);
