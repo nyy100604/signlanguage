@@ -16,6 +16,8 @@ const Practice = () => {
   const [viewReview, setViewReview] = useState(false);
   const [shoswSelect, setShowSelect] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(false);
+  const [videoData, setVideoData] = useState(null);
+  const [showVideo, setShowVideo] = useState(false);
   console.log(unitname)
   const handleNextQuestion = () => {
     setNextQuestion(!nextQuestion);
@@ -27,6 +29,15 @@ const Practice = () => {
   const handleShoswSelect = () => {
     setShowSelect(!shoswSelect);
   };
+
+  const handleShowVideo = () => {
+    setShowVideo(true);
+  };
+
+  const handleCloseVideo = () => {
+    setShowVideo(false);
+  };
+
 
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
@@ -114,6 +125,8 @@ const Practice = () => {
     handleNextQuestion();
   }
 
+  
+
   function mediaRecorderSetup() {
     inputVideo = document.querySelector("#inputVideo");
     let chunks = []; // 在 mediaRecord 要用的 chunks
@@ -169,6 +182,7 @@ const Practice = () => {
           // outputVideo.controls = true;
           var file = new File(chunks, "video.mp4", { type: "video/mp4" });
           chunks = [];
+          setVideoData(file);
 
           var formData = new FormData();
           formData.append("file", file);
@@ -255,8 +269,22 @@ const Practice = () => {
           <p className=" absolute top-[50%] text-white text-[3.5rem]">{time}</p>
         </div>
 
-        <div className="right flex items-center w-[400px] justify-center flex-col  w-[240px] mt-[2rem]">
+        <div className="right flex items-center w-[400px] justify-center flex-col  mt-[2rem]">
           {" "}
+          {showVideo && (
+            <div className="overlay">
+              <div className="video-container">
+                <button onClick={handleCloseVideo} className="close-button">
+                  ×
+                </button>
+                <video
+                  controls
+                  className="w-[375px] h-[200px] "
+                  src={URL.createObjectURL(videoData)}
+                />
+              </div>
+            </div>
+          )}
           {time == 3 && (
             <button
               className="rounded-lg text-white text-[1.5rem] bg-red-600 py-[0.7rem] px-[1rem]"
@@ -265,14 +293,26 @@ const Practice = () => {
               開始錄製
             </button>
           )}
+          <div className="my-2"></div> 
           {time2 == 0 && (
+             <div className="mt-20">
             <button
-              className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.7rem] px-[1rem]"
+              className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.5rem] px-[1rem]"
               onClick={onReset}
             >
               再來一次
             </button>
+            </div>
           )}
+          <div className="my-2"></div> 
+           {time2 == 0 && (
+            <button
+              className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.5rem] px-[1rem]"
+              onClick={handleShowVideo}
+            >
+              回放影片
+            </button>
+           )}
           {time2 == 0 && !accuracyNum && (
             <div role="status" className="flex items-center justify-center">
               <svg
