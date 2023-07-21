@@ -18,6 +18,9 @@ const Practice = () => {
   const [nextQuestion, setNextQuestion] = useState(false);
   const [videoData, setVideoData] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
+  const [showAccuracy, setShowAccuracy] = useState(true);
+  const [showResult, setShowResult] = useState(false);
+
   console.log(unitname)
   const handleNextQuestion = () => {
     setNextQuestion(!nextQuestion);
@@ -38,6 +41,7 @@ const Practice = () => {
     setShowVideo(false);
   };
 
+  
 
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
@@ -123,8 +127,11 @@ const Practice = () => {
     setTime(3);
     setTime2(5);
     handleNextQuestion();
+    setShowAccuracy(false); // 将 showAccuracy 重置为 false，隐藏评语
+    setShowResult(false);
   }
 
+  
   
 
   function mediaRecorderSetup() {
@@ -202,6 +209,8 @@ const Practice = () => {
           );
           console.log(response.data);
           setAccuracyNum(response.data);
+          setShowAccuracy(true); 
+          setShowResult(true);
         }
       })
       .catch(function (error) {
@@ -215,7 +224,7 @@ const Practice = () => {
 
   useEffect(() => {
     mediaRecorderSetup();
-  }, [nextQuestion]);
+  }, [nextQuestion, showAccuracy]);
 
   return (
     <>
@@ -275,7 +284,7 @@ const Practice = () => {
             <div className="overlay">
               <div className="video-container">
                 <button onClick={handleCloseVideo} className="close-button">
-                  ×
+                  x
                 </button>
                 <video
                   controls
@@ -295,7 +304,7 @@ const Practice = () => {
           )}
           <div className="my-2"></div> 
           {time2 == 0 && (
-             <div className="mt-20">
+             <div className="mt-12">
             <button
               className="rounded-lg text-white text-[1.5rem] bg-sky-600  py-[0.5rem] px-[1rem]"
               onClick={onReset}
@@ -313,7 +322,7 @@ const Practice = () => {
               回放影片
             </button>
            )}
-          {time2 == 0 && !accuracyNum && (
+          {time2 === 0 && !accuracyNum &&(
             <div role="status" className="flex items-center justify-center">
               <svg
                 aria-hidden="true"
@@ -344,7 +353,7 @@ const Practice = () => {
           {recording && (
             <p className="text-[2rem] mt-5">{`剩餘秒數： ${time2}`}</p>
           )}
-          {accuracyNum && <p className=" text-[1.5rem] text-center mt-[0.5rem]">你的分數評語：{accuracyNum}</p>}
+          {showAccuracy && accuracyNum && <p className=" text-[1.5rem] text-center mt-[0.5rem]">你的分數評語：{accuracyNum}</p>}
         </div>
       </div>
       <Footer />
