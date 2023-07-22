@@ -76,6 +76,9 @@ const LoginForm = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("id");
+    localStorage.removeItem("pwd");
+    localStorage.removeItem("group");
     setIsLoggedIn(false);
   };
 
