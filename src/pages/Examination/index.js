@@ -2,30 +2,71 @@ import React, { useEffect, useState } from "react";
 import NavComponents from "../../components/NavComponents";
 import Footer from "../../components/Footer";
 import axios from "axios";
-import { unit1 } from "../../Hooks/wordsHook";
 import { test1 } from "../../Hooks/wordsHook";
-import { unit2 } from "../../Hooks/wordsHook";
 import { test2 } from "../../Hooks/wordsHook";
-import { unit3 } from "../../Hooks/wordsHook";
 import { test3 } from "../../Hooks/wordsHook";
 
 
 // 第一次啟動攝影機
 
 const Examination = () => {
-  let words = test1;
+  
+  let [words, setWords] = useState(test1); 
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
   let [question, setQuestion] = useState(1);
   let [recording, setRecording] = useState(false);
   const [accuracyNum, setAccuracyNum] = useState(null);
   let [wait, setWait] = useState(false);
+  const [selectedUnit, setSelectedUnit] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   /**
    * MediaRecorder Related Event Handler
    */
   let mediaRecorder = null;
   let inputVideoURL = null;
+
   // let outputVideoURL = null;
+  const switchWordsByUnit = (unit) => {
+    switch (unit) {
+      case "單元1":
+        return test1;
+      case "單元2":
+        return test2;
+      case "單元3":
+        return test3;
+      default:
+        return test1; // 預設為 test1，你也可以設定其他預設值
+    }
+  };
+
+  const handleSelectUnit = (unit) => {
+    switch (unit) {
+      case "單元1":
+        setWords(test1);
+        break;
+      case "單元2":
+        setWords(test2);
+        break;
+      case "單元3":
+        setWords(test3);
+        break;
+      default:
+        setWords(test1); 
+        break;
+    }
+    setShowModal(false); // 關閉彈出視窗
+  };
+
+  useEffect(() => {
+    if (!selectedUnit) {
+      setShowModal(true);
+    }
+     else {
+    // 根據所選單元切換 words
+    words = switchWordsByUnit(selectedUnit);
+    }
+  },[selectedUnit]);
 
   function start() {
     // mediaRecorderSetup();
@@ -168,8 +209,20 @@ const Examination = () => {
           formData.append('user_id',id);
           formData.append("file", file);
           formData.append("user_id", id);
-          formData.append("words", unit1[question-1]);
-          console.log(unit1[question-1]);
+          if(setWords === test1 ){
+            formData.append("words", test1[question-1]);
+            console.log(test1[question-1]);
+          }
+          else if (setWords === test2){
+            formData.append("words", test2[question-1]);
+            console.log(test2[question-1]);
+          }
+          else if (setWords === test3){
+            formData.append("words", test3[question-1]);
+            console.log(test3[question-1]);
+          }
+        
+         
 
           const response = await axios.post(
             "http://localhost:5000/exam",
@@ -201,6 +254,20 @@ const Examination = () => {
     <>
       {" "}
       <NavComponents needIcon={true} />
+      {/* Modal */}
+      {showModal && (
+         <div className="modal-background">
+         <div className="modal-content">
+           <div className="unit-buttons">
+           <h2>選擇單元</h2>
+             <button onClick={() => handleSelectUnit("單元1")}>單元1</button>
+             <button onClick={() => handleSelectUnit("單元2")}>單元2</button>
+             <button onClick={() => handleSelectUnit("單元3")}>單元3</button>
+             {/*<button onClick={() => setShowModal(false)}>取消</button>*/}
+            </div>
+         </div>
+       </div>
+      )}
       <div className="min-h-[85vh] flex">
         <div className="left flex flex-col justify-center items-center relative w-[1000px] mt-[2rem]">
           {" "}
