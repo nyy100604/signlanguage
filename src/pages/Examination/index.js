@@ -69,8 +69,8 @@ const Examination = () => {
   },[selectedUnit]);
 
   function start() {
-    // mediaRecorderSetup();
-    // console.log(mediaRecorder);
+    mediaRecorderSetup();
+    console.log(mediaRecorder);
     let intetval1 = setInterval(() => {
       setWait(true);
       time--;
