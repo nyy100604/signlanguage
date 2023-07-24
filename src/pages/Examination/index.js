@@ -29,11 +29,11 @@ const Examination = () => {
   // let outputVideoURL = null;
   const switchWordsByUnit = (unit) => {
     switch (unit) {
-      case "單元1":
+      case "unit1":
         return test1;
-      case "單元2":
+      case "unit2":
         return test2;
-      case "單元3":
+      case "unit3":
         return test3;
       default:
         return test1; // 預設為 test1，你也可以設定其他預設值
@@ -42,16 +42,20 @@ const Examination = () => {
 
   const handleSelectUnit = (unit) => {
     switch (unit) {
-      case "單元1":
+      case "unit1":
+        setSelectedUnit("unit1");
         setWords(test1);
         break;
-      case "單元2":
+      case "unit2":
+        setSelectedUnit("unit2");
         setWords(test2);
         break;
-      case "單元3":
+      case "unit3":
+        setSelectedUnit("unit3");
         setWords(test3);
         break;
       default:
+        setSelectedUnit("unit1");
         setWords(test1); 
         break;
     }
@@ -67,10 +71,9 @@ const Examination = () => {
     words = switchWordsByUnit(selectedUnit);
     }
   },[selectedUnit]);
-
   function start() {
     mediaRecorderSetup();
-    console.log(mediaRecorder);
+    // console.log(mediaRecorder);
     let intetval1 = setInterval(() => {
       setWait(true);
       time--;
@@ -208,16 +211,16 @@ const Examination = () => {
           var formData = new FormData();
           formData.append('user_id',id);
           formData.append("file", file);
-          formData.append("user_id", id);
-          if(setWords === test1 ){
+          formData.append("unit", selectedUnit)
+          if(words === test1){
             formData.append("words", test1[question-1]);
             console.log(test1[question-1]);
           }
-          else if (setWords === test2){
+          else if (words === test2){
             formData.append("words", test2[question-1]);
             console.log(test2[question-1]);
           }
-          else if (setWords === test3){
+          else if (words === test3){
             formData.append("words", test3[question-1]);
             console.log(test3[question-1]);
           }
@@ -260,9 +263,9 @@ const Examination = () => {
          <div className="modal-content">
            <div className="unit-buttons">
            <h2>選擇單元</h2>
-             <button onClick={() => handleSelectUnit("單元1")}>單元1</button>
-             <button onClick={() => handleSelectUnit("單元2")}>單元2</button>
-             <button onClick={() => handleSelectUnit("單元3")}>單元3</button>
+             <button onClick={() => handleSelectUnit("unit1")}>單元1</button>
+             <button onClick={() => handleSelectUnit("unit2")}>單元2</button>
+             <button onClick={() => handleSelectUnit("unit3")}>單元3</button>
              {/*<button onClick={() => setShowModal(false)}>取消</button>*/}
             </div>
          </div>
