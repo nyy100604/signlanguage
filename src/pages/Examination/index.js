@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavComponents from "../../components/NavComponents";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import axios from "axios";
 import { test1 } from "../../Hooks/wordsHook";
@@ -15,11 +16,14 @@ const Examination = () => {
   let [time, setTime] = useState(3);
   let [time2, setTime2] = useState(5);
   let [question, setQuestion] = useState(1);
+  const [examEnded, setExamEnded] = useState(false);
   let [recording, setRecording] = useState(false);
   const [accuracyNum, setAccuracyNum] = useState(null);
   let [wait, setWait] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const go = useNavigate();
+
   /**
    * MediaRecorder Related Event Handler
    */
@@ -146,7 +150,7 @@ const Examination = () => {
     setTime2(5);
     setQuestion((q) => {
       return q + 1;
-    });
+    });  
   }
 
   function mediaRecorderSetup() {
@@ -250,8 +254,19 @@ const Examination = () => {
   }
 
   useEffect(() => {
-    mediaRecorderSetup();
+    if (question <= 10) {
+      // 当 question 小于等于 10 时，继续执行 mediaRecorderSetup
+      mediaRecorderSetup();
+    } else {
+      // 当 question 大于 10 时，设置 examEnded 为 true，考试结束
+      setExamEnded(true);
+    }
   }, [question]);
+
+  if (examEnded) {
+    go("/select"); // 考试结束时显示 "考试结束" 内容
+  }
+  
 
   return (
     <>
@@ -303,7 +318,7 @@ const Examination = () => {
               className="rounded-lg text-white text-[1.2rem] bg-sky-600 py-[0.7rem] px-[1rem]"
               onClick={onReset}
             >
-              下一題
+              {question === 10 ? "完成考试" : "下一題"}
             </button>
           )}
           {wait && <p className="text-[2rem] mt-5">準備3秒</p>}
