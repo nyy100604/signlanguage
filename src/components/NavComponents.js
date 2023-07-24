@@ -105,6 +105,14 @@ const NavComponents = ({ needIcon }) => {
               />
             </>
           )}
+           {!needIcon && (
+          <HiArrowRightOnRectangle
+                className="hover:drop-shadow-md element-class ml-48"
+                onClick={() => {
+                  handleLogout();
+                  go("/signIn");
+                }}
+              />)}
         </div>
       </div>
     </header>
