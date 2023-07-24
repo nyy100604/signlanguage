@@ -8,6 +8,7 @@ import Examination from "./pages/Examination";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import HomePages from "./pages/Homepages";
+import Grade from "./pages/Grade";
 
 const router = createHashRouter([
   {
@@ -46,6 +47,11 @@ const router = createHashRouter([
     path: "/SignUp",
     element: <SignUp />,
   },
+  {
+    path: "/Grade",
+    element: <Grade />,
+  },
+
 ]);
 
 export default router;
