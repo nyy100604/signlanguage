@@ -264,7 +264,7 @@ const Examination = () => {
   }, [question]);
 
   if (examEnded) {
-    go("/select"); // 考试结束时显示 "考试结束" 内容
+    go("/Grade"); // 考试结束时显示 "考试结束" 内容
   }
   
 
