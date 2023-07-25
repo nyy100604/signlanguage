@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 export const useWords = () => {
   const [unit, setUnit] = useState(null);
@@ -51,4 +51,43 @@ export const unit3 = [
   "輸",
   "贏",
   "他們兩個",
+];
+
+export const test1 =[
+  "做",
+  "二十一",
+  "十二",
+  "公園",
+  "百",
+  "開始",
+  "完",
+  "六十",
+  "幫/幫忙/幫助",
+  "連續",
+];
+
+export const test2 = [
+  "下一個",
+  "盪鞦韆",
+  "放心",
+  "人",
+  "輪流",
+  "洗衣服",
+  "時間",
+  "洗車",
+  "換",
+  "盪鞦韆", 
+];
+
+export const test3 = [
+  "常常",
+  "他們兩個",
+  "會不會",
+  "贏",
+  "久",
+  "累/辛苦",
+  "回答",
+  "猜",
+  "問",
+  "比賽",
 ];

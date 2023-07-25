@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LearnIcon from "../components/LearnIcon.png";
 import PracticeIcon from "../components/PracticeIcon.png";
 import TestIcon from "../components/TestIcon.png";
 const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const group = localStorage.getItem("group");
+  const blockGroup = '2'
+
+
   const go = useNavigate();
   const showUnit = () => {
     if (content === "學習區") setShowLearningUnit(true);
-    if (content === "練習區") {
+    if (content === "練習區" && group !== blockGroup) {
       go("/practice");
     }
     if (content === "測驗區") {
@@ -19,28 +24,50 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
     image = (
       <img
         src={LearnIcon}
-        alt="Image 1"
+        alt="學習區圖示"
         style={{ width: "150px", height: "150px" }}
       />
     );
   } else if (content === "練習區") {
-    image = (
-      <img
-        src={PracticeIcon}
-        alt="Image 2"
-        style={{ width: "150px", height: "150px" }}
-      />
-    );
+    if(group === blockGroup) {
+      image = (
+      <div
+        className="relative"
+        onMouseEnter={() => setTooltipVisible(true)}
+        onMouseLeave={() => setTooltipVisible(false)}
+      >
+        <img
+          src={PracticeIcon}
+          alt="練習區鎖定圖示"
+          style={{ width: "150px", height: "150px" }}
+        />
+        {tooltipVisible && (
+          <div className="absolute top-0 bg-gray-200 p-2 pl-5 pr-5 mt-14 rounded">
+            <p className="text-[1rem] whitespace-nowrap">練習區已鎖定。</p>
+          </div>)}
+        </div>
+       
+      );
+    }else {
+      image = (
+        <img
+            src={PracticeIcon}
+            alt="練習區圖示"
+            style={{ width: "150px", height: "150px" }}
+        />
+      )
+    }
+    
   } else if (content === "測驗區") {
     image = (
       <img
         src={TestIcon}
-        alt="Image 3"
+        alt="測驗區圖示"
         style={{ width: "150px", height: "150px" }}
       />
     );
   }
-
+  
   //const boxImage = <img src={TestIcon} alt="Test Icon "style={{ width: '150px', height: '150px' }} /> ;
   //const boxImage2 = <img src={LearnIcon} alt="Learn Icon "style={{ width: '150px', height: '150px' }} /> ;
   //const boxImage3 = <img src={PracticeIcon} alt="Practice Icon "style={{ width: '150px', height: '150px' }} /> ;

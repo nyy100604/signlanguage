@@ -46,13 +46,16 @@ const LoginForm = () => {
         requestData
         
       );
-      console.log(response);
+      console.log(response.data.judge);
 
-      if (response.data === "True") {
+      if (response.data.judge=== "True") {
         setMessage("登入成功，前往首頁");
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem('id', username);
         localStorage.setItem('pwd', password);
+        localStorage.setItem('group', response.data.group);
+        localStorage.setItem('name', response.data.name);
+
         setIsLoggedIn(true);
 
         
@@ -74,6 +77,10 @@ const LoginForm = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("id");
+    localStorage.removeItem("pwd");
+    localStorage.removeItem("group");
+    localStorage.removeItem("name");
     setIsLoggedIn(false);
   };
 
