@@ -19,7 +19,7 @@ const isUserLoggedIn = () => {
 };
 const UserGroup = () => {
   const group = localStorage.getItem("group");
-  if(group === 1) {
+  if(group === "1") {
     return true
   }
 };
