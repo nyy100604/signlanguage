@@ -25,7 +25,7 @@ const Grade = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:5000/Grade",
+                "http://localhost:5000/grade",
                 formData,
                 {
                     headers: {
@@ -45,13 +45,14 @@ const Grade = () => {
        getGrade()
     }, [selectedUnit]);
 
-    const selectedUnitWordsAndGrades = selectedUnit in gradesData ? Object.entries(gradesData[selectedUnit]) : [];
-    const totalScore = selectedUnitWordsAndGrades.reduce((acc, [, grade]) => acc + (grade || 0), 0);
+    const totalScore = gradesData.grade || 0;
+    const studentGrades = gradesData.table || [];
 
     return (
         <>
             <NavComponents needIcon={true} />
-            <div>
+            <div className="min-h-[85vh] flex">
+                <div style={{ margin: "0 auto", maxWidth: "200px" }}>
                 <h2>查看成績</h2>
                 <label>
                     選擇單元：
@@ -64,22 +65,34 @@ const Grade = () => {
                     </select>
                 </label>
                 <h3>{selectedUnit} 的成績如下：</h3>
-                {selectedUnitWordsAndGrades ? (
-                    <ul>
-                        {selectedUnitWordsAndGrades.map(({ word, grade }) => (
-                            <li key={word}>
-                                單字：{word}  成績：{grade}
-                            </li>
-                        ))}
-                    </ul>
+               
+                {studentGrades.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>單字</th>
+                                <th>成績</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {studentGrades.map(({ word, grade }) => (
+                                <tr key={word}>
+                                    <td>{word}</td>
+                                    <td>{grade > 80 ? 10 : 0}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 ) : (
                     <p>該單元沒有成績資料。</p>
                 )}
-                 {selectedUnitWordsAndGrades.length > 0 && (
-                    <div>
+               
+
+                {studentGrades.length > 0 && (
+    
                         <h3>{selectedUnit} 的總分為：{totalScore}</h3>
-                    </div>
                 )}
+                </div>
             </div>
             <Footer />
         </>
@@ -87,3 +100,8 @@ const Grade = () => {
 };
 
 export default Grade;
+
+
+
+
+
