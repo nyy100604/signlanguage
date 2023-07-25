@@ -54,6 +54,7 @@ const LoginForm = () => {
         localStorage.setItem('id', username);
         localStorage.setItem('pwd', password);
         localStorage.setItem('group', response.data.group);
+        localStorage.setItem('name', response.data.name);
 
         setIsLoggedIn(true);
 
@@ -79,6 +80,7 @@ const LoginForm = () => {
     localStorage.removeItem("id");
     localStorage.removeItem("pwd");
     localStorage.removeItem("group");
+    localStorage.removeItem("name");
     setIsLoggedIn(false);
   };
 

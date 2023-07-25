@@ -6,14 +6,22 @@ import { BsPersonGear } from "react-icons/bs";
 import { GiVideoConference } from "react-icons/gi";
 import logo from "./logo.jpg";
 
+
 const NavComponents = ({ needIcon }) => {
   const go = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const userName = localStorage.getItem("name");
+
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("id");
+    localStorage.removeItem("pwd");
+    localStorage.removeItem("group");
+    localStorage.removeItem("name");
     setIsLoggedIn(false);
   };
+
   const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
@@ -26,6 +34,7 @@ const NavComponents = ({ needIcon }) => {
       // 導航到選擇的路徑
       navigate(path);
     };
+
 
     return (
       <div className="dropdown">
@@ -106,13 +115,15 @@ const NavComponents = ({ needIcon }) => {
             </>
           )}
            {!needIcon && (
+            <div className="flex">
+            <div className="text-base mx-2">{ userName } 同學,您好</div>
           <HiArrowRightOnRectangle
-                className="hover:drop-shadow-md element-class ml-48"
+                className="hover:drop-shadow-md element-class"
                 onClick={() => {
                   handleLogout();
                   go("/signIn");
                 }}
-              />)}
+              /></div>)}
         </div>
       </div>
     </header>
