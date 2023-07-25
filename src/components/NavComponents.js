@@ -11,19 +11,14 @@ const IconHint = ({ hint, isHover }) => {
   return isHover && <div className="iconHint">{hint}</div>;
 };
 
-
 const NavComponents = ({ needIcon }) => {
   const go = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-<<<<<<< HEAD
   const [hover, isHover] = useHover();
   const [hover2, isHover2] = useHover();
   const [hover3, isHover3] = useHover();
   const [hover4, isHover4] = useHover();
-=======
   const userName = localStorage.getItem("name");
-
->>>>>>> 7bc2453914076508a7a85f3b12f7af317e41241f
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -46,7 +41,6 @@ const NavComponents = ({ needIcon }) => {
       // 導航到選擇的路徑
       navigate(path);
     };
-
 
     return (
       <div className="dropdown">
@@ -145,16 +139,21 @@ const NavComponents = ({ needIcon }) => {
               </div>
             </>
           )}
-           {!needIcon && (
-            <div className="flex">
-            <div className="text-base mx-2">{ userName } 同學,您好</div>
-          <HiArrowRightOnRectangle
+          {!needIcon && (
+            <div className="flex relative" ref={hover4}>
+              <div className="text-base mx-2">{userName} 同學,您好</div>
+              <HiArrowRightOnRectangle
                 className="hover:drop-shadow-md element-class"
                 onClick={() => {
                   handleLogout();
                   go("/signIn");
                 }}
-              /></div>)}
+              />{" "}
+              <div className=" absolute left-24 top-6">
+                <IconHint hint={"登出"} isHover={isHover4} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>
