@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavComponents from "../../components/NavComponents";
+import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import axios from "axios";
@@ -285,16 +286,21 @@ const Examination = () => {
       <NavComponents needIcon={true} />
       {/* Modal */}
       {showModal && (
-         <div className="modal-background">
-         <div className="modal-content">
-           <div className="unit-buttons">
-           <h2>選擇單元</h2>
-             <button onClick={() => handleSelectUnit("unit1")}>單元1</button>
-             <button onClick={() => handleSelectUnit("unit2")}>單元2</button>
-             <button onClick={() => handleSelectUnit("unit3")}>單元3</button>
-             {/*<button onClick={() => setShowModal(false)}>取消</button>*/}
-            </div>
-         </div>
+         <div className="fixed top-0 z-[600] bg-black opacity-90 w-full h-full flex flex-col items-center justify-center">
+            <div
+            className="text-white p-[1rem] rounded-full text-[2rem]  bg-slate-800 cursor-pointer mb-3"
+            onClick={() => {
+              go("/select");
+            }}
+          >
+            {" "}
+            <VscChromeClose />
+          </div>
+           <div className=" unit-buttons">
+             <button className="text-white text-[2.5rem] cursor-pointer m-[1.5rem]" onClick={() => handleSelectUnit("unit1")}>單元1</button>
+             <button className="text-white text-[2.5rem] cursor-pointer m-[1.5rem]" onClick={() => handleSelectUnit("unit2")}>單元2</button>
+             <button className="text-white text-[2.5rem] cursor-pointer m-[1.5rem]" onClick={() => handleSelectUnit("unit3")}>單元3</button>
+          </div>
        </div>
       )}
       <div className="min-h-[85vh] flex">
