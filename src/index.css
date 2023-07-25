@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .iconHint {
+    @apply bg-black/50 text-base text-center font-normal text-white rounded-lg w-[70px] px-[6px] py-[3px];
+  }
+}
 * {
   padding: 0;
   margin: 0;
@@ -16,6 +21,7 @@ body {
   top: calc(100% + 40px); /* 距離上方的距離，這裡設定為下拉選單下方 */
   /* 距離左側的距離，這裡設定為與父元素左對齊 */
   width: 85px;
+  border-radius: 50%;
 }
 
 .dropdown-menu-item {
@@ -32,12 +38,3 @@ body {
 .dropdown {
   position: relative;
 }
-
-.film-icon-container {
-  position: relative;
-}
-
-.element-class:hover {
-  color: rgb(144, 205, 241); /* 更改所需的顏色 */
-}
-

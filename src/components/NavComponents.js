@@ -5,15 +5,25 @@ import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import { BsPersonGear } from "react-icons/bs";
 import { GiVideoConference } from "react-icons/gi";
 import logo from "./logo.jpg";
+import { useHover } from "../Hooks/hoverHook";
+
+const IconHint = ({ hint, isHover }) => {
+  return isHover && <div className="iconHint">{hint}</div>;
+};
 
 const NavComponents = ({ needIcon }) => {
   const go = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hover, isHover] = useHover();
+  const [hover2, isHover2] = useHover();
+  const [hover3, isHover3] = useHover();
+  const [hover4, isHover4] = useHover();
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
   };
+
   const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
@@ -80,29 +90,48 @@ const NavComponents = ({ needIcon }) => {
             AI手語助學網站
           </span>
         </div>
-        <div className="flex w-[300px] justify-evenly mt-2 md:my-0 cursor-pointer">
+        <div className="flex w-[300px] justify-evenly mt-2 md:my-0">
           {needIcon && (
             <>
-              <ImHome
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  go("/select");
-                }}
-              />
-              <DropdownMenu />
-              <BsPersonGear
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  go("/practice");
-                }}
-              />
-              <HiArrowRightOnRectangle
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  handleLogout();
-                  go("/signIn");
-                }}
-              />
+              {" "}
+              <div className="relative " ref={hover}>
+                {" "}
+                <ImHome
+                  onClick={() => {
+                    go("/select");
+                  }}
+                />{" "}
+                <div className=" absolute">
+                  <IconHint hint={"首頁"} isHover={isHover} />
+                </div>
+              </div>{" "}
+              <div className="relative" ref={hover2}>
+                <DropdownMenu />
+                <div className=" absolute">
+                  <IconHint hint={"學習區"} isHover={isHover2} />
+                </div>
+              </div>{" "}
+              <div className="relative" ref={hover3}>
+                <BsPersonGear
+                  onClick={() => {
+                    go("/practice");
+                  }}
+                />
+                <div className=" absolute">
+                  <IconHint hint={"練習區"} isHover={isHover3} />
+                </div>
+              </div>
+              <div className="relative" ref={hover4}>
+                <HiArrowRightOnRectangle
+                  onClick={() => {
+                    handleLogout();
+                    go("/signIn");
+                  }}
+                />{" "}
+                <div className=" absolute">
+                  <IconHint hint={"登出"} isHover={isHover4} />
+                </div>
+              </div>
             </>
           )}
         </div>
