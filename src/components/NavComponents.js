@@ -99,9 +99,8 @@ const NavComponents = ({ needIcon }) => {
         <div className="flex w-[300px] justify-evenly mt-2 md:my-0">
           {needIcon && (
             <>
-<<<<<<< HEAD
               {" "}
-              <div className="relative " ref={hover}>
+              <div className="relative hover:drop-shadow-md element-class" ref={hover}>
                 {" "}
                 <ImHome
                   onClick={() => {
@@ -118,7 +117,7 @@ const NavComponents = ({ needIcon }) => {
                   <IconHint hint={"學習區"} isHover={isHover2} />
                 </div>
               </div>{" "}
-              <div className="relative" ref={hover3}>
+              <div className="relative hover:drop-shadow-md element-class" ref={hover3}>
                 <BsPersonGear
                   onClick={() => {
                     go("/practice");
@@ -141,44 +140,6 @@ const NavComponents = ({ needIcon }) => {
               </div>
             </>
           )}
-          {!needIcon && (
-            <div className="flex relative" ref={hover4}>
-              <div className="text-base mx-2">{userName} 同學,您好</div>
-=======
-              <ImHome
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  go("/select");
-                }}
-              />
-              <DropdownMenu />
-              <BsPersonGear
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  go("/practice");
-                }}
-              />
-               <BiSearch
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  go("/Grade");
-                }}
-              />
->>>>>>> 10244399583cf4d5d19b39752e80246c83987970
-              <HiArrowRightOnRectangle
-                className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  handleLogout();
-                  go("/signIn");
-                }}
-              />{" "}
-              <div className=" absolute left-24 top-6">
-                <IconHint hint={"登出"} isHover={isHover4} />
-              </div>
-            </div>
-          )}
-<<<<<<< HEAD
-=======
            {!needIcon && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
@@ -201,7 +162,6 @@ const NavComponents = ({ needIcon }) => {
                   </div>
               
               </div>)}
->>>>>>> 10244399583cf4d5d19b39752e80246c83987970
         </div>
       </div>
     </header>
