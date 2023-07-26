@@ -51,34 +51,38 @@ const Grade = () => {
     return (
         <>
             <NavComponents needIcon={true} />
-            <div className="min-h-[85vh] flex">
-                <div style={{ margin: "0 auto", maxWidth: "200px" }}>
-                <h2>查看成績</h2>
-                <label>
-                    選擇單元：
-                    <select value={selectedUnit} onChange={handleUnitChange}>
-                        {units.map((unit) => (
-                            <option key={unit} value={unit}>
-                                {unit}
-                            </option>
-                        ))}
-                    </select>
-                </label>
+            <div className="min-h-[85vh] flex justify-center items-center mx-auto text-xl" >
+             {''}
+             <div className='block leading-8'>
+                <label className="block mt-4">
+                <span className="text-lg font-semibold">選擇單元：</span>
+                <select
+                   value={selectedUnit}
+                   onChange={handleUnitChange}
+                   className="mt-1 block w-full p-2  text-center rounded-md border-gray-950 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                   {units.map((unit) => (
+                    <option key={unit} value={unit}>
+                           {unit}
+                 </option>
+                         ))}
+                     </select>
+                    </label>
+
                 <h3>{selectedUnit} 的成績如下：</h3>
                
                 {studentGrades.length > 0 ? (
-                    <table>
+                    <table className="border border-gray-300">
                         <thead>
-                            <tr>
-                                <th>單字</th>
-                                <th>成績</th>
+                            <tr className="border border-gray-300 px-4 py-2">
+                                <th className="border border-gray-300 px-4 py-2">單字</th>
+                                <th className="border border-gray-300 px-4 py-2">成績</th>
                             </tr>
                         </thead>
                         <tbody>
                             {studentGrades.map(({ word, grade }) => (
-                                <tr key={word}>
-                                    <td>{word}</td>
-                                    <td>{grade > 80 ? 10 : 0}</td>
+                                <tr key={word} className="bg-gray-100">
+                                    <td className="border border-gray-300 px-4 py-2">{word}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{grade > 80 ? 10 : 0}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -88,10 +92,18 @@ const Grade = () => {
                 )}
                
 
-                {studentGrades.length > 0 && (
-    
-                        <h3>{selectedUnit} 的總分為：{totalScore}</h3>
+               {studentGrades.length > 0 && selectedUnit === 'unit1' && (
+                 <h3 className='p-4 mr-8 text-2xl'>單元一的總分為：{totalScore}分</h3>
                 )}
+
+                {studentGrades.length > 0 && selectedUnit === 'unit2' && (
+                 <h3 className='p-4 mr-8 text-2xl'>單元二的總分為：{totalScore}分</h3>
+                )}
+
+                {studentGrades.length > 0 && selectedUnit === 'unit3' && (
+                 <h3 className='p-4 mr-8 text-2xl'>單元三的總分為：{totalScore}分</h3>
+                )}
+
                 </div>
             </div>
             <Footer />

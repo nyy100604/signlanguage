@@ -4,6 +4,7 @@ import { ImHome } from "react-icons/im";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import { BsPersonGear } from "react-icons/bs";
 import { GiVideoConference } from "react-icons/gi";
+import { BiSearch } from "react-icons/bi";
 import logo from "./logo.jpg";
 import { useHover } from "../Hooks/hoverHook";
 
@@ -98,6 +99,7 @@ const NavComponents = ({ needIcon }) => {
         <div className="flex w-[300px] justify-evenly mt-2 md:my-0">
           {needIcon && (
             <>
+<<<<<<< HEAD
               {" "}
               <div className="relative " ref={hover}>
                 {" "}
@@ -142,6 +144,27 @@ const NavComponents = ({ needIcon }) => {
           {!needIcon && (
             <div className="flex relative" ref={hover4}>
               <div className="text-base mx-2">{userName} 同學,您好</div>
+=======
+              <ImHome
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  go("/select");
+                }}
+              />
+              <DropdownMenu />
+              <BsPersonGear
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  go("/practice");
+                }}
+              />
+               <BiSearch
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  go("/Grade");
+                }}
+              />
+>>>>>>> 10244399583cf4d5d19b39752e80246c83987970
               <HiArrowRightOnRectangle
                 className="hover:drop-shadow-md element-class"
                 onClick={() => {
@@ -154,6 +177,31 @@ const NavComponents = ({ needIcon }) => {
               </div>
             </div>
           )}
+<<<<<<< HEAD
+=======
+           {!needIcon && (
+            <div className="flex">
+            <div className="text-base mx-2">{ userName } 同學,您好</div>
+            <div className="mx-2">
+                <BiSearch
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  go("/Grade");
+                }}
+              />
+              </div>
+                <div className="mx-2">
+               <HiArrowRightOnRectangle
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  handleLogout();
+                  go("/signIn");
+                }}
+                />
+                  </div>
+              
+              </div>)}
+>>>>>>> 10244399583cf4d5d19b39752e80246c83987970
         </div>
       </div>
     </header>
