@@ -21,32 +21,32 @@ const UnitSelect = ({ setShowLearningUnit }) => {
           {" "}
           <VscChromeClose />
         </div>
-        <div className=" text-white ">
-          <div
-            className="text-[2.5rem] cursor-pointer m-[1.5rem]"
+        <div className=" text-white unit-buttons">
+          <button
+            className="text-white text-[2.5rem] cursor-pointer m-[1.5rem]"
             onClick={() => {
               go("/learning/1");
             }}
           >
             單元 1
-          </div>
-          <div
-            className="text-[2.5rem] cursor-pointer m-[1.5rem]"
+          </button>
+          <button
+            className="text-white text-[2.5rem] cursor-pointer m-[1.5rem]"
             onClick={() => {
               go("/learning/2");
             }}
           >
             單元 2
-          </div>
-          <div
-            className="text-[2.5rem] cursor-pointer m-[1.5rem]
+          </button>
+          <button
+            className="text-white text-[2.5rem] cursor-pointer m-[1.5rem]
      "
             onClick={() => {
               go("/learning/3");
             }}
           >
             單元 3
-          </div>
+          </button>
         </div>
       </div>
     </>
