@@ -19,6 +19,8 @@ const NavComponents = ({ needIcon }) => {
   const [hover2, isHover2] = useHover();
   const [hover3, isHover3] = useHover();
   const [hover4, isHover4] = useHover();
+  const [hover5, isHover5] = useHover();
+  const [hover6, isHover6] = useHover();
   const userName = localStorage.getItem("name");
 
   const handleLogout = () => {
@@ -143,24 +145,32 @@ const NavComponents = ({ needIcon }) => {
            {!needIcon && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
-            <div className="mx-2">
-                <BiSearch
-                className="hover:drop-shadow-md element-class"
+            <div className="mx-2 relative"  ref={hover5}>
+            <BiSearch
+                className="hover:drop-shadow-md  element-class"
                 onClick={() => {
                   go("/Grade");
                 }}
               />
+               <div className=" absolute">
+               <IconHint hint={"查詢成績"} isHover={isHover5} />
+               </div>
+               
               </div>
-                <div className="mx-2">
-               <HiArrowRightOnRectangle
+              <div className="relative mx-2" ref={hover6}>
+                <HiArrowRightOnRectangle
                 className="hover:drop-shadow-md element-class"
-                onClick={() => {
-                  handleLogout();
-                  go("/signIn");
-                }}
-                />
-                  </div>
-              
+                  onClick={() => {
+                    handleLogout();
+                    go("/signIn");
+                  }}
+                />{" "}
+                <div className=" absolute">
+                  <IconHint hint={"登出"} isHover={isHover6} />
+                </div>
+              </div>
+               
+          
               </div>)}
         </div>
       </div>

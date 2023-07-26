@@ -288,7 +288,7 @@ const Examination = () => {
       {showModal && (
         <div className="fixed top-0 z-[600] bg-black opacity-90 w-full h-full flex flex-col items-center justify-center">
         <div
-        className="text-white p-[1rem] rounded-full text-[2rem]  bg-slate-800 cursor-pointer mb-3 modal-content"
+        className="text-white p-[1rem] rounded-full text-[2rem]  bg-slate-800 cursor-pointer mb-3"
             onClick={() => {
               go("/select");
             }}
