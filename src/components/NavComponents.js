@@ -4,6 +4,7 @@ import { ImHome } from "react-icons/im";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import { BsPersonGear } from "react-icons/bs";
 import { GiVideoConference } from "react-icons/gi";
+import { BiSearch } from "react-icons/bi";
 import logo from "./logo.jpg";
 
 
@@ -105,6 +106,12 @@ const NavComponents = ({ needIcon }) => {
                   go("/practice");
                 }}
               />
+               <BiSearch
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  go("/Grade");
+                }}
+              />
               <HiArrowRightOnRectangle
                 className="hover:drop-shadow-md element-class"
                 onClick={() => {
@@ -117,13 +124,25 @@ const NavComponents = ({ needIcon }) => {
            {!needIcon && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
-          <HiArrowRightOnRectangle
+            <div className="mx-2">
+                <BiSearch
+                className="hover:drop-shadow-md element-class"
+                onClick={() => {
+                  go("/Grade");
+                }}
+              />
+              </div>
+                <div className="mx-2">
+               <HiArrowRightOnRectangle
                 className="hover:drop-shadow-md element-class"
                 onClick={() => {
                   handleLogout();
                   go("/signIn");
                 }}
-              /></div>)}
+                />
+                  </div>
+              
+              </div>)}
         </div>
       </div>
     </header>
