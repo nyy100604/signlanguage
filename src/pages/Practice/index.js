@@ -26,7 +26,12 @@ const Practice = () => {
     setNextQuestion(!nextQuestion);
   };
   const handleRevewVideo = () => {
+    if (!unit || !unit[nowWords]) {
+      // 沒有選擇動作，顯示提示或其他處理方式
+      alert("請先選擇手語動作");
+    } else {
     setViewReview(!viewReview);
+    }
   };
 
   const handleShoswSelect = () => {
@@ -40,7 +45,15 @@ const Practice = () => {
   const handleCloseVideo = () => {
     setShowVideo(false);
   };
-
+  const handleStartRecording = () => {
+    if (!unit || !unit[nowWords]) {
+      // 沒有選擇動作，顯示提示或其他處理方式
+      alert("請先選擇手語動作");
+    } else {
+      start();
+    }
+  };
+  
   
 
   let [time, setTime] = useState(3);
@@ -70,9 +83,6 @@ const Practice = () => {
   }
 
   function start2() {
-    console.log(time2);
-
-    console.log(recording);
     setTime();
     setRecording(true);
     onStartRecording();
@@ -106,17 +116,21 @@ const Practice = () => {
   // Start Recording: mediaRecorder.start()
   function onStartRecording() {
     console.log(mediaRecorder);
-    mediaRecorder.start(1000);
-    console.log("mediaRecorder.start()");
-    if (time2 <= 0) {
-      onStopRecording();
+    if (mediaRecorder) {
+      mediaRecorder.start(1000);
+      console.log("mediaRecorder.start()");
+      if (time2 <= 0) {
+        onStopRecording();
+      }
     }
   }
 
   // Stop Recording: mediaRecorder.stop()
   function onStopRecording() {
-    mediaRecorder.stop();
-    console.log("mediaRecorder.stop()");
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      console.log("mediaRecorder.stop()");
+    }
   }
 
   // Reset Recording
@@ -125,10 +139,16 @@ const Practice = () => {
     URL.revokeObjectURL(inputVideoURL);
     // 重新啟動攝影機
     setTime(3);
-    setTime2(5);
-    handleNextQuestion();
-    setShowAccuracy(false); // 将 showAccuracy 重置为 false，隐藏评语
-    setShowResult(false);
+  setTime2(5);
+  setWait(false);
+  setRecording(false);
+  setVideoData(null);
+  setShowVideo(false);
+  setAccuracyNum(null);
+  setShowAccuracy(true);
+  setShowResult(false);
+  setShowSelect(false);
+  setViewReview(false);
   }
 
   
@@ -224,7 +244,7 @@ const Practice = () => {
 
   useEffect(() => {
     mediaRecorderSetup();
-  }, [nextQuestion, showAccuracy]);
+  }, [nextQuestion, showAccuracy , time, time2]);
 
   return (
     <>
@@ -294,10 +314,10 @@ const Practice = () => {
               </div>
             </div>
           )}
-          {time === 3 && (
+          {time === 3 &&  (
             <button
               className="rounded-lg text-white text-[1.5rem] bg-red-600 py-[0.7rem] px-[1rem]"
-              onClick={start}
+              onClick={handleStartRecording}
             >
               開始錄製
             </button>
@@ -360,6 +380,7 @@ const Practice = () => {
       <Footer />
     </>
   );
+          
 };
 
-export default Practice;
+  export default Practice;
