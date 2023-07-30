@@ -12,7 +12,7 @@ const IconHint = ({ hint, isHover }) => {
   return isHover && <div className="iconHint">{hint}</div>;
 };
 
-const NavComponents = ({ needIcon }) => {
+const NavComponents = ({ needIcon, exam }) => {
   const go = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hover, isHover] = useHover();
@@ -142,7 +142,7 @@ const NavComponents = ({ needIcon }) => {
               </div>
             </>
           )}
-           {!needIcon && (
+           {!needIcon && !exam && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
             <div className="mx-2 relative"  ref={hover5}>
@@ -157,6 +157,24 @@ const NavComponents = ({ needIcon }) => {
                </div>
                
               </div>
+              <div className="relative mx-2" ref={hover6}>
+                <HiArrowRightOnRectangle
+                className="hover:drop-shadow-md element-class"
+                  onClick={() => {
+                    handleLogout();
+                    go("/signIn");
+                  }}
+                />{" "}
+                <div className=" absolute">
+                  <IconHint hint={"登出"} isHover={isHover6} />
+                </div>
+              </div>
+               
+          
+              </div>)}
+              {!needIcon && exam && (
+            <div className="flex">
+              <div className="text-base mx-2">{ userName } 同學,您好</div>
               <div className="relative mx-2" ref={hover6}>
                 <HiArrowRightOnRectangle
                 className="hover:drop-shadow-md element-class"

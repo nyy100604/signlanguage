@@ -283,7 +283,7 @@ const Examination = () => {
   return (
     <>
       {" "}
-      <NavComponents needIcon={true} />
+      <NavComponents needIcon={false} exam={true} />
       {/* Modal */}
       {showModal && (
         <div className="fixed top-0 z-[600] bg-black opacity-90 w-full h-full flex flex-col items-center justify-center">
