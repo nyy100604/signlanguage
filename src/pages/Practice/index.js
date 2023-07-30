@@ -30,9 +30,14 @@ const Practice = () => {
       // 沒有選擇動作，顯示提示或其他處理方式
       alert("請先選擇手語動作");
     } else {
-    setViewReview(!viewReview);
+      if(!viewReview){
+        setViewReview(true);
+      }else{
+        onReset()
+      }
     }
   };
+
 
   const handleShoswSelect = () => {
     setShowSelect(!shoswSelect);
@@ -53,6 +58,7 @@ const Practice = () => {
       start();
     }
   };
+
   
   
 
@@ -139,18 +145,20 @@ const Practice = () => {
     URL.revokeObjectURL(inputVideoURL);
     // 重新啟動攝影機
     setTime(3);
-  setTime2(5);
-  setWait(false);
-  setRecording(false);
-  setVideoData(null);
-  setShowVideo(false);
-  setAccuracyNum(null);
-  setShowAccuracy(true);
-  setShowResult(false);
-  setShowSelect(false);
-  setViewReview(false);
+    setTime2(5);
+    setWait(false);
+    setRecording(false);
+    setVideoData(null);
+    setShowVideo(false);
+    setAccuracyNum(null);
+    setShowAccuracy(true);
+    setShowResult(false);
+    setShowSelect(false);
+    setViewReview(false);
   }
-
+  useEffect(() => {
+    onReset();
+  }, [nextQuestion]);
   
   
 
@@ -241,10 +249,11 @@ const Practice = () => {
       console.log("inputVideo on loadedmetadata");
     });
   }
-
   useEffect(() => {
-    mediaRecorderSetup();
-  }, [nextQuestion, showAccuracy , time, time2]);
+    if (time === 3) {
+      mediaRecorderSetup();
+    }
+  }, [nextQuestion, showAccuracy , time]);
 
   return (
     <>
@@ -346,7 +355,7 @@ const Practice = () => {
             <div role="status" className="flex items-center justify-center">
               <svg
                 aria-hidden="true"
-                class="inline w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                className="inline w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

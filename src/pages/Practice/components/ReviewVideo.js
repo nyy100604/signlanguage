@@ -16,8 +16,8 @@ const ReviewVideo = ({ handleRevewVideo, unitname, nowWords }) => {
         <video
           src={require(`../video/${unitname}/${nowWords}.mp4`)}
           className=" w-[950px] h-[470px] z-[510]"
-          autoplay="true"
-          controls="true"
+          // autoplay="true"
+          // controls="true"
         ></video>
       </div>
     </>
