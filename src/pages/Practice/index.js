@@ -31,11 +31,7 @@ const Practice = () => {
       // 沒有選擇動作，顯示提示或其他處理方式
       alert("請先選擇手語動作");
     } else {
-      if(!viewReview){
-        setViewReview(true);
-      }else{
-        onReset()
-      }
+      setViewReview(!viewReview);
     }
   };
 
@@ -254,7 +250,7 @@ const Practice = () => {
     if (time === 3) {
       mediaRecorderSetup();
     }
-  }, [nextQuestion, showAccuracy , time]);
+  }, [nextQuestion, showAccuracy , time, viewReview]);
 
   return (
     <>

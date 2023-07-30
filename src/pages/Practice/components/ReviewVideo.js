@@ -9,15 +9,14 @@ const ReviewVideo = ({ handleRevewVideo, unitname, nowWords }) => {
         {" "}
         <div
           className=" text-white text-[2rem] mb-6 bg-slate-800 cursor-pointer rounded-full p-[0.5rem]"
-          onClick={handleRevewVideo}
         >
-          <VscChromeClose />
+          <VscChromeClose  onClick={handleRevewVideo}/>
         </div>
         <video
           src={require(`../video/${unitname}/${nowWords}.mp4`)}
           className=" w-[950px] h-[470px] z-[510]"
-          // autoplay="true"
-          // controls="true"
+          autoplay="true"
+          controls="true"
         ></video>
       </div>
     </>
