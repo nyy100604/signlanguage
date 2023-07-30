@@ -7,6 +7,7 @@ import axios from "axios";
 import { VscPlayCircle } from "react-icons/vsc";
 import { VscChevronRight } from "react-icons/vsc";
 import { useWords } from "../../Hooks/wordsHook";
+import { VscChromeClose } from "react-icons/vsc";
 
 // 第一次啟動攝影機
 
@@ -307,22 +308,23 @@ const Practice = () => {
           <p className=" absolute top-[50%] text-white text-[3.5rem]">{time}</p>
         </div>
 
-        <div className="right flex items-center w-[400px] justify-center flex-col  mt-[2rem]">
           {" "}
           {showVideo && (
-            <div className="overlay">
-              <div className="video-container">
-                <button onClick={handleCloseVideo} className="close-button">
-                  x
-                </button>
-                <video
-                  controls
-                  className="w-[375px] h-[200px] "
-                  src={URL.createObjectURL(videoData)}
-                />
-              </div>
-            </div>
-          )}
+             <div className="z-[500] bg-black opacity-95 w-[100%] h-[100vh] absolute top-0 flex flex-col items-center justify-center">
+             <div
+               className=" text-white text-[2rem] mb-6 bg-slate-800 cursor-pointer rounded-full p-[0.5rem]"
+                onClick={handleCloseVideo}
+              >
+             <VscChromeClose />
+             </div>
+            <video
+              controls
+              className=" w-[950px] h-[470px] z-[510]]"
+              src={URL.createObjectURL(videoData)}
+            />
+        </div>
+      )}
+       <div className="right flex items-center w-[400px] justify-center flex-col  mt-[2rem]">
           {time === 3 &&  (
             <button
               className="rounded-lg text-white text-[1.5rem] bg-red-600 py-[0.7rem] px-[1rem]"
@@ -385,7 +387,7 @@ const Practice = () => {
           )}
           {showAccuracy && accuracyNum && <p className=" text-[1.5rem] text-center mt-[0.5rem]">你的分數評語：{accuracyNum}</p>}
         </div>
-      </div>
+       </div>
       <Footer />
     </>
   );
