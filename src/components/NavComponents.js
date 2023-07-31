@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
@@ -32,52 +32,82 @@ const NavComponents = ({ needIcon, exam }) => {
     setIsLoggedIn(false);
   };
 
-  const DropdownMenu = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+const DropdownMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+  const dropdownTimeout = useRef(null);
 
-    const handleToggle = () => {
-      setIsOpen(!isOpen);
-    };
+  const handleToggle = () => {
+    clearTimeout(dropdownTimeout.current); 
+    setIsOpen(!isOpen);
 
-    const handleOptionClick = (path) => {
-      // 導航到選擇的路徑
-      navigate(path);
-    };
-
-    return (
-      <div className="dropdown">
-        <div className="film-icon-container">
-          <GiVideoConference
-            className="hover:drop-shadow-md cursor-pointer element-class"
-            onClick={handleToggle}
-          />
-          {isOpen && (
-            <ul className="dropdown-menu">
-              <li
-                className="dropdown-menu-item"
-                onClick={() => handleOptionClick("/learning/1")}
-              >
-                單元1
-              </li>
-              <li
-                className="dropdown-menu-item"
-                onClick={() => handleOptionClick("/learning/2")}
-              >
-                單元2
-              </li>
-              <li
-                className="dropdown-menu-item"
-                onClick={() => handleOptionClick("/learning/3")}
-              >
-                單元3
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
-    );
+    if (!isOpen) {
+      dropdownTimeout.current = setTimeout(() => {
+        setIsOpen(false);
+      }, 5000); // 延遲五秒關閉
+    }
   };
+
+  const handleOptionClick = (path) => {
+      // 導航到選擇的路徑
+    navigate(path);
+    setIsOpen(false); // 選擇後隱藏選單
+  };
+
+  const handleMouseEnter = () => {
+    clearTimeout(dropdownTimeout.current); 
+  };
+
+  const handleMouseLeave = () => {
+    if (isOpen) {
+      dropdownTimeout.current = setTimeout(() => {
+        setIsOpen(false);
+      }, 5000); 
+    }
+  };
+
+  useEffect(() => {
+    
+    return () => {
+      clearTimeout(dropdownTimeout.current);
+    };
+  }, []);
+
+  return (
+    <div className="dropdown" ref={dropdownRef} onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave}>
+      <div className="film-icon-container">
+        <GiVideoConference
+          className="hover:drop-shadow-md cursor-pointer element-class"
+          onClick={handleToggle}
+        />
+        {isOpen && (
+          <ul className="dropdown-menu">
+            <li
+              className="dropdown-menu-item"
+              onClick={() => handleOptionClick("/learning/1")}
+            >
+              單元1
+            </li>
+            <li
+              className="dropdown-menu-item"
+              onClick={() => handleOptionClick("/learning/2")}
+            >
+              單元2
+            </li>
+            <li
+              className="dropdown-menu-item"
+              onClick={() => handleOptionClick("/learning/3")}
+            >
+              單元3
+            </li>
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+};
 
   return (
     <header className="bg-[#124c8a] sticky top-0 z-50 font-bold text-2xl px-[1rem] py-[1rem] hover:drop-shadow-xl text-white">
