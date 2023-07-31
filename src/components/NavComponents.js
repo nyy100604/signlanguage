@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
@@ -32,6 +32,15 @@ const NavComponents = ({ needIcon, exam }) => {
     setIsLoggedIn(false);
   };
 
+  function isUserLoggedIn() {
+    if(localStorage.getItem("isLoggedIn")) {
+      setIsLoggedIn(true);
+    }
+  };  
+  useEffect(() => {
+    isUserLoggedIn();
+  }, [isLoggedIn]);
+
   const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
@@ -45,6 +54,7 @@ const NavComponents = ({ needIcon, exam }) => {
       navigate(path);
     };
 
+    isUserLoggedIn();
     return (
       <div className="dropdown">
         <div className="film-icon-container">
@@ -99,7 +109,7 @@ const NavComponents = ({ needIcon, exam }) => {
           </span>
         </div>
         <div className="flex w-[300px] justify-evenly mt-2 md:my-0">
-          {needIcon && (
+          {needIcon && isLoggedIn && (
             <>
               {" "}
               <div className="relative hover:drop-shadow-md element-class" ref={hover}>
@@ -142,7 +152,7 @@ const NavComponents = ({ needIcon, exam }) => {
               </div>
             </>
           )}
-           {!needIcon && !exam && (
+           {!needIcon && !exam && isLoggedIn && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
             <div className="mx-2 relative"  ref={hover5}>
@@ -172,23 +182,25 @@ const NavComponents = ({ needIcon, exam }) => {
                
           
               </div>)}
-              {!needIcon && exam && (
-            <div className="flex">
-              <div className="text-base mx-2">{ userName } 同學,您好</div>
-              <div className="relative mx-2" ref={hover6}>
-                <HiArrowRightOnRectangle
-                className="hover:drop-shadow-md element-class"
-                  onClick={() => {
-                    handleLogout();
-                    go("/signIn");
-                  }}
-                />{" "}
-                <div className=" absolute">
-                  <IconHint hint={"登出"} isHover={isHover6} />
+              {!needIcon && exam && isLoggedIn && (
+              <div className="flex">
+                <div className="text-base mx-2">{ userName } 同學,您好</div>
+                <div className="relative mx-2" ref={hover6}>
+                  <HiArrowRightOnRectangle
+                  className="hover:drop-shadow-md element-class"
+                    onClick={() => {
+                      handleLogout();
+                      go("/signIn");
+                    }}
+                  />{" "}
+                  <div className=" absolute">
+                    <IconHint hint={"登出"} isHover={isHover6} />
+                  </div>
                 </div>
-              </div>
-               
-          
+              </div>)}
+              {!isLoggedIn && (
+              <div className="flex">
+                <div className="text-base mx-2 ml-40">{ userName } 同學,您好</div>
               </div>)}
         </div>
       </div>
