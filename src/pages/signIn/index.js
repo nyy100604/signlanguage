@@ -21,7 +21,22 @@ const LoginForm = () => {
 
   useEffect(() => {
     checkLoginStatus();
-  }, []);
+
+    const handleBeforeUnload = (event) => {
+      // 如果使用者已經登入，執行登出操作
+      if (isLoggedIn) {
+        handleLogout();
+      }
+
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isLoggedIn]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -88,8 +103,10 @@ const LoginForm = () => {
     <div>
       <NavComponents />
       <div className="flex w-[100%] h-[90vh] items-center justify-center">
-        <div className="flex flex-col justify-center items-center w-[55%] h-[100%] text-[3.5rem]">
-          A I <p>手語助學網站....</p>
+        <div className="flex flex-col justify-center items-center w-[55%] h-[100%] text-[1.75rem] leading-relaxed">
+          <p>歡迎來到AI手語助學網站</p>
+          <p>使用網站前請先幫我們登入</p>
+          <p>使用後請記得登出</p>
         </div>
         <div className="flex items-center justify-evenly w-[45%] h-[65%] mr-[4rem] shadow-2xl rounded-lg">
           <div className="w-[100%] h-[100%]">
