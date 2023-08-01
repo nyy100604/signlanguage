@@ -32,11 +32,6 @@ const NavComponents = ({ needIcon, exam }) => {
     setIsLoggedIn(false);
   };
 
-const DropdownMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-  const dropdownRef = useRef(null);
-  const dropdownTimeout = useRef(null);
   function isUserLoggedIn() {
     if(localStorage.getItem("isLoggedIn")) {
       setIsLoggedIn(true);
@@ -45,6 +40,13 @@ const DropdownMenu = () => {
   useEffect(() => {
     isUserLoggedIn();
   }, [isLoggedIn]);
+  
+const DropdownMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+  const dropdownTimeout = useRef(null);
+  
 
 
   const handleToggle = () => {
