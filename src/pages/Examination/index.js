@@ -119,7 +119,7 @@ const Examination = () => {
     video: {
       width: { min: 1280 },
       height: { min: 720 },
-      frameRate: { ideal: 20, max: 20 },
+      frameRate: { ideal: 10, max: 10 },
     },
   };
 
