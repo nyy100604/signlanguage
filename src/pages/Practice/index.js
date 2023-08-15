@@ -8,8 +8,14 @@ import { VscPlayCircle } from "react-icons/vsc";
 import { VscChevronRight } from "react-icons/vsc";
 import { useWords } from "../../Hooks/wordsHook";
 import { VscChromeClose } from "react-icons/vsc";
+import { useHover } from "../..//Hooks/hoverHook";
 
 // 第一次啟動攝影機
+
+const IconHint = ({ hint, isHover }) => {
+  return isHover && <div className="iconHint">{hint}</div>;
+};
+
 
 const Practice = () => {
   let [unitname, setUnitname, unit, setUnit, nowWords, setNowWords] =
@@ -21,6 +27,7 @@ const Practice = () => {
   const [showVideo, setShowVideo] = useState(false);
   const [showAccuracy, setShowAccuracy] = useState(true);
   const [showResult, setShowResult] = useState(false);
+  const [hover, isHover] = useHover();
 
   console.log(unitname)
   const handleNextQuestion = () => {
@@ -290,7 +297,12 @@ const Practice = () => {
             </span>
             <span className="text-[2rem] cursor-pointer">
               {" "}
+              <div className="relative" ref={hover}>
               <VscPlayCircle onClick={handleRevewVideo} />
+              <div className=" absolute">
+                  <IconHint hint={"觀看學習影片"} isHover={isHover} />
+                </div>
+              </div>
             </span>
           </p>
           <video
