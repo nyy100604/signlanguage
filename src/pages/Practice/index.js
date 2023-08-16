@@ -29,6 +29,8 @@ const Practice = () => {
   const [showResult, setShowResult] = useState(false);
   const [hover, isHover] = useHover();
 
+ 
+
   console.log(unitname)
   const handleNextQuestion = () => {
     setNextQuestion(!nextQuestion);
@@ -59,7 +61,11 @@ const Practice = () => {
       // 沒有選擇動作，顯示提示或其他處理方式
       alert("請先選擇手語動作");
     } else {
-      start();
+      const shouldStartRecording = window.confirm("請選擇較亮的環境錄製並盡量保持上半身在鏡頭內\n按下確定後倒數三秒就會開始錄製\n動作請在五秒內比完\n準備好就開始吧><");
+      if (shouldStartRecording) {
+        start();
+      }
+      
     }
   };
 
