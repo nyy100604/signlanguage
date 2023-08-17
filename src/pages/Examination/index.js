@@ -266,8 +266,11 @@ const Examination = () => {
   }
 
   useEffect(() => {
-    if (question <= 10) {
+    if (question <=10 ) {
       // 当 question 小于等于 10 时，继续执行 mediaRecorderSetup
+      if(words === test2 && question === 10){
+        setExamEnded(true);
+      } 
       mediaRecorderSetup();
     } else {
       // 当 question 大于 10 时，设置 examEnded 为 true，考试结束
@@ -352,7 +355,15 @@ const Examination = () => {
             </div>
           )}
           
-          {time2 === 0 && accuracyNum && (
+          {time2 === 0 && accuracyNum && words === test2 && (
+            <button
+              className="rounded-lg text-white text-[1.5rem] bg-sky-600 py-[0.5rem] px-[1rem]"
+              onClick={onReset}
+            >
+              {question === 9 ? "完成考试" : "下一題"}
+            </button>
+          )}
+           {time2 === 0 && accuracyNum && ( words === test1 || words == test3 ) && (
             <button
               className="rounded-lg text-white text-[1.5rem] bg-sky-600 py-[0.5rem] px-[1rem]"
               onClick={onReset}

@@ -76,7 +76,6 @@ export const test2 = [
   "時間",
   "洗車",
   "換",
-  "盪鞦韆", 
 ];
 
 export const test3 = [
