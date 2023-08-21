@@ -5,6 +5,7 @@ import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import { BsPersonGear } from "react-icons/bs";
 import { GiVideoConference } from "react-icons/gi";
 import { BiSearch } from "react-icons/bi";
+import { FaRegUserCircle } from "react-icons/fa";
 import logo from "./logo.jpg";
 import { useHover } from "../Hooks/hoverHook";
 
@@ -21,6 +22,7 @@ const NavComponents = ({ needIcon, exam }) => {
   const [hover4, isHover4] = useHover();
   const [hover5, isHover5] = useHover();
   const [hover6, isHover6] = useHover();
+  const [hover7, isHover7] = useHover();
   const userName = localStorage.getItem("name");
 
   const handleLogout = () => {
@@ -183,11 +185,12 @@ const DropdownMenu = () => {
               </div>
             </>
           )}
-           {!needIcon && !exam && isLoggedIn && (
+         
+              {!needIcon && !exam && isLoggedIn && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
             <div className="mx-2 relative"  ref={hover5}>
-            <BiSearch
+              <BiSearch
                 className="hover:drop-shadow-md  element-class"
                 onClick={() => {
                   go("/Grade");
@@ -197,6 +200,18 @@ const DropdownMenu = () => {
                <IconHint hint={"查詢成績"} isHover={isHover5} />
                </div>
                
+              </div>
+              <div className="relative mx-2" ref={hover7}>
+                <FaRegUserCircle
+                className="hover:drop-shadow-md element-class"
+                  onClick={() => {
+                    go("/signUp");
+                  }}
+                />{" "}
+                <div className=" absolute">
+                  <IconHint hint={"註冊"} isHover={isHover7} />
+                </div>
+              
               </div>
               <div className="relative mx-2" ref={hover6}>
                 <HiArrowRightOnRectangle
@@ -209,6 +224,7 @@ const DropdownMenu = () => {
                 <div className=" absolute">
                   <IconHint hint={"登出"} isHover={isHover6} />
                 </div>
+              
               </div>
                
           
