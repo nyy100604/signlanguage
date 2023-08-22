@@ -93,15 +93,15 @@ const Grade = () => {
                
 
                {studentGrades.length > 0 && selectedUnit === 'unit1' && (
-                 <h3 className='p-4 mr-8 text-2xl'>單元一的總分為：{totalScore}分</h3>
+                 <h3 className='p-4 mr-8 text-2xl'>單元一共10題答對 {totalScore/10} 題</h3>
                 )}
 
                 {studentGrades.length > 0 && selectedUnit === 'unit2' && (
-                 <h3 className='p-4 mr-8 text-2xl'>單元二的總分為：{totalScore}分</h3>
+                 <h3 className='p-4 mr-8 text-2xl'>單元二共9題答對 {totalScore/10} 題</h3>
                 )}
 
                 {studentGrades.length > 0 && selectedUnit === 'unit3' && (
-                 <h3 className='p-4 mr-8 text-2xl'>單元三的總分為：{totalScore}分</h3>
+                 <h3 className='p-4 mr-8 text-2xl'>單元三共10題答對 {totalScore/10} 題</h3>
                 )}
 
                 </div>
