@@ -61,10 +61,7 @@ const Practice = () => {
       // 沒有選擇動作，顯示提示或其他處理方式
       alert("請先選擇手語動作");
     } else {
-      const shouldStartRecording = window.confirm("請選擇較亮的環境錄製並盡量保持上半身在鏡頭內\n按下確定後倒數三秒就會開始錄製\n動作請在五秒內比完\n準備好就開始吧><");
-      if (shouldStartRecording) {
         start();
-      }
       
     }
   };
@@ -347,6 +344,25 @@ const Practice = () => {
               開始錄製
             </button>
           )}
+         
+            {time === 3 &&  (
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            <p className="text-gray-600 text-base" >
+                請選擇較亮的環境錄製並盡量保持上半身在鏡頭內
+            <br />
+                按下開始錄製後會倒數三秒才會正式錄製
+            <br />
+                動作請在五秒內完成
+            <br />
+                動作正確會顯示：你做對了！
+            <br />
+                不正確則會顯示：你做錯囉！
+            <br />
+                準備好就開始吧！
+        <span role="img" aria-label="開心">😄</span>
+             </p>
+               </div>
+     )}
           <div className="my-2"></div> 
           {time2 === 0 && (
              <div className="mt-12">
@@ -356,6 +372,7 @@ const Practice = () => {
             >
               再來一次
             </button>
+        
             </div>
           )}
           <div className="my-2"></div> 
