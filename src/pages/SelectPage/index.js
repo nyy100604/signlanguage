@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import UnitSelect from "./components/UnitSelect";
 
 const Main = () => {
-  const wbesiteContent = ["學習區", "練習區", "測驗區"];
+  const wbesiteContent = ["學習區", "練習區"];
   const [showLearningUnit, setShowLearningUnit] = useState(false);
   const [showPractice, setShowPractice] = useState(false);
 

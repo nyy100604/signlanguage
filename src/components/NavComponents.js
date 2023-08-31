@@ -15,7 +15,7 @@ const IconHint = ({ hint, isHover }) => {
 
 const NavComponents = ({ needIcon, exam }) => {
   const go = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [hover, isHover] = useHover();
   const [hover2, isHover2] = useHover();
   const [hover3, isHover3] = useHover();
@@ -31,13 +31,12 @@ const NavComponents = ({ needIcon, exam }) => {
     localStorage.removeItem("pwd");
     localStorage.removeItem("group");
     localStorage.removeItem("name");
-    setIsLoggedIn(false);
+    setIsLoggedIn(true);
   };
 
   function isUserLoggedIn() {
-    if(localStorage.getItem("isLoggedIn")) {
-      setIsLoggedIn(true);
-    }
+    setIsLoggedIn(true);
+    
   };  
   useEffect(() => {
     isUserLoggedIn();
@@ -129,7 +128,7 @@ const DropdownMenu = () => {
           <span
             className="flex items-center"
             onClick={() => {
-              go("/select");
+              go("/");
             }}
           >
             <img
@@ -142,14 +141,14 @@ const DropdownMenu = () => {
           </span>
         </div>
         <div className="flex w-[300px] justify-evenly mt-2 md:my-0">
-          {needIcon && isLoggedIn && (
+          {needIcon && (
             <>
               {" "}
               <div className="relative hover:drop-shadow-md element-class" ref={hover}>
                 {" "}
                 <ImHome
                   onClick={() => {
-                    go("/select");
+                    go("/");
                   }}
                 />{" "}
                 <div className=" absolute">
@@ -172,82 +171,23 @@ const DropdownMenu = () => {
                   <IconHint hint={"練習區"} isHover={isHover3} />
                 </div>
               </div>
-              <div className="relative" ref={hover4}>
-                <HiArrowRightOnRectangle
-                  onClick={() => {
-                    handleLogout();
-                    go("/signIn");
-                  }}
-                />{" "}
-                <div className=" absolute">
-                  <IconHint hint={"登出"} isHover={isHover4} />
-                </div>
-              </div>
+              {" "}
+  
             </>
           )}
          
-              {!needIcon && !exam && isLoggedIn && (
+              {!needIcon && !exam  && (
             <div className="flex">
             <div className="text-base mx-2">{ userName } 同學,您好</div>
-            <div className="mx-2 relative"  ref={hover5}>
-              <BiSearch
-                className="hover:drop-shadow-md  element-class"
-                onClick={() => {
-                  go("/Grade");
-                }}
-              />
-               <div className=" absolute">
-               <IconHint hint={"查詢成績"} isHover={isHover5} />
-               </div>
-               
-              </div>
-              <div className="relative mx-2" ref={hover7}>
-                <FaRegUserCircle
-                className="hover:drop-shadow-md element-class"
-                  onClick={() => {
-                    go("/signUp");
-                  }}
-                />{" "}
-                <div className=" absolute">
-                  <IconHint hint={"註冊"} isHover={isHover7} />
-                </div>
-              
-              </div>
-              <div className="relative mx-2" ref={hover6}>
-                <HiArrowRightOnRectangle
-                className="hover:drop-shadow-md element-class"
-                  onClick={() => {
-                    handleLogout();
-                    go("/signIn");
-                  }}
-                />{" "}
-                <div className=" absolute">
-                  <IconHint hint={"登出"} isHover={isHover6} />
-                </div>
-              
-              </div>
-               
           
               </div>)}
-              {!needIcon && exam && isLoggedIn && (
+              {!needIcon && exam && (
               <div className="flex">
                 <div className="text-base mx-2">{ userName } 同學,您好</div>
                 <div className="relative mx-2" ref={hover6}>
-                  <HiArrowRightOnRectangle
-                  className="hover:drop-shadow-md element-class"
-                    onClick={() => {
-                      handleLogout();
-                      go("/signIn");
-                    }}
-                  />{" "}
-                  <div className=" absolute">
-                    <IconHint hint={"登出"} isHover={isHover6} />
-                  </div>
+                  {" "}
+            
                 </div>
-              </div>)}
-              {!isLoggedIn && (
-              <div className="flex">
-                <div className="text-base mx-2 ml-40">{ userName } 同學,您好</div>
               </div>)}
         </div>
       </div>
