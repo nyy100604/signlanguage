@@ -15,9 +15,9 @@ const Box = ({ content, setShowLearningUnit, setShowPractice }) => {
     if (content === "練習區" && group !== blockGroup) {
       go("/practice");
     }
-    if (content === "測驗區") {
-      go("/Examination");
-    }
+    // if (content === "測驗區") {
+    //   go("/Examination");
+    // }
   };
   let image;
   if (content === "學習區") {
